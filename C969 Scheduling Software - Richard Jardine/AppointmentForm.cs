@@ -29,7 +29,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
         private void AppointmentCancelBtn_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
     }
 }

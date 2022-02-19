@@ -36,6 +36,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.AddNewCustBtn = new System.Windows.Forms.Button();
             this.CustomerDGV = new System.Windows.Forms.DataGridView();
             this.AppointmentTab = new System.Windows.Forms.TabPage();
+            this.AllAppointmentsRadio = new System.Windows.Forms.RadioButton();
             this.DeleteAppointmentBtn = new System.Windows.Forms.Button();
             this.UpdateAppointmentBtn = new System.Windows.Forms.Button();
             this.AddNewAppointmentBtn = new System.Windows.Forms.Button();
@@ -43,14 +44,13 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.ByWeekRadio = new System.Windows.Forms.RadioButton();
             this.AppointmenttDGV = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.CustomerCountRadio = new System.Windows.Forms.RadioButton();
+            this.ConsultantSchedulesRadio = new System.Windows.Forms.RadioButton();
+            this.AppointmentsByTypeRadio = new System.Windows.Forms.RadioButton();
             this.GenerateReportBtn = new System.Windows.Forms.Button();
             this.ReportsDGV = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.LogOutBtn = new System.Windows.Forms.Button();
-            this.AppointmentsByTypeRadio = new System.Windows.Forms.RadioButton();
-            this.ConsultantSchedulesRadio = new System.Windows.Forms.RadioButton();
-            this.CustomerCountRadio = new System.Windows.Forms.RadioButton();
-            this.AllAppointmentsRadio = new System.Windows.Forms.RadioButton();
             this.ReportsTab.SuspendLayout();
             this.CustomerTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CustomerDGV)).BeginInit();
@@ -97,6 +97,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.DeleteCustBtn.TabIndex = 3;
             this.DeleteCustBtn.Text = "Delete Selected";
             this.DeleteCustBtn.UseVisualStyleBackColor = true;
+            this.DeleteCustBtn.Click += new System.EventHandler(this.DeleteCustBtn_Click);
             // 
             // UpdateCustBtn
             // 
@@ -107,6 +108,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.UpdateCustBtn.TabIndex = 2;
             this.UpdateCustBtn.Text = "Update Selected";
             this.UpdateCustBtn.UseVisualStyleBackColor = true;
+            this.UpdateCustBtn.Click += new System.EventHandler(this.UpdateCustBtn_Click);
             // 
             // AddNewCustBtn
             // 
@@ -117,6 +119,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.AddNewCustBtn.TabIndex = 1;
             this.AddNewCustBtn.Text = "Add New";
             this.AddNewCustBtn.UseVisualStyleBackColor = true;
+            this.AddNewCustBtn.Click += new System.EventHandler(this.AddNewCustBtn_Click);
             // 
             // CustomerDGV
             // 
@@ -143,7 +146,19 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.AppointmentTab.TabIndex = 1;
             this.AppointmentTab.Text = "Appointments";
             this.AppointmentTab.UseVisualStyleBackColor = true;
-            this.AppointmentTab.Click += new System.EventHandler(this.AppointmentTab_Click);
+            // 
+            // AllAppointmentsRadio
+            // 
+            this.AllAppointmentsRadio.AutoSize = true;
+            this.AllAppointmentsRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.AllAppointmentsRadio.Location = new System.Drawing.Point(13, 353);
+            this.AllAppointmentsRadio.Name = "AllAppointmentsRadio";
+            this.AllAppointmentsRadio.Size = new System.Drawing.Size(131, 21);
+            this.AllAppointmentsRadio.TabIndex = 6;
+            this.AllAppointmentsRadio.TabStop = true;
+            this.AllAppointmentsRadio.Text = "All Appointments";
+            this.AllAppointmentsRadio.UseVisualStyleBackColor = true;
+            this.AllAppointmentsRadio.CheckedChanged += new System.EventHandler(this.AllAppointmentsRadio_CheckedChanged);
             // 
             // DeleteAppointmentBtn
             // 
@@ -154,6 +169,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.DeleteAppointmentBtn.TabIndex = 5;
             this.DeleteAppointmentBtn.Text = "Delete Selected";
             this.DeleteAppointmentBtn.UseVisualStyleBackColor = true;
+            this.DeleteAppointmentBtn.Click += new System.EventHandler(this.DeleteAppointmentBtn_Click);
             // 
             // UpdateAppointmentBtn
             // 
@@ -164,6 +180,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.UpdateAppointmentBtn.TabIndex = 4;
             this.UpdateAppointmentBtn.Text = "Update Selected";
             this.UpdateAppointmentBtn.UseVisualStyleBackColor = true;
+            this.UpdateAppointmentBtn.Click += new System.EventHandler(this.UpdateAppointmentBtn_Click);
             // 
             // AddNewAppointmentBtn
             // 
@@ -174,6 +191,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.AddNewAppointmentBtn.TabIndex = 3;
             this.AddNewAppointmentBtn.Text = "Add New";
             this.AddNewAppointmentBtn.UseVisualStyleBackColor = true;
+            this.AddNewAppointmentBtn.Click += new System.EventHandler(this.AddNewAppointmentBtn_Click);
             // 
             // ByMonthRadio
             // 
@@ -199,6 +217,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.ByWeekRadio.TabStop = true;
             this.ByWeekRadio.Text = "This Week";
             this.ByWeekRadio.UseVisualStyleBackColor = true;
+            this.ByWeekRadio.CheckedChanged += new System.EventHandler(this.ByWeekRadio_CheckedChanged);
             // 
             // AppointmenttDGV
             // 
@@ -224,6 +243,42 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.tabPage3.Text = "Reports";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // CustomerCountRadio
+            // 
+            this.CustomerCountRadio.AutoSize = true;
+            this.CustomerCountRadio.Location = new System.Drawing.Point(272, 370);
+            this.CustomerCountRadio.Name = "CustomerCountRadio";
+            this.CustomerCountRadio.Size = new System.Drawing.Size(136, 22);
+            this.CustomerCountRadio.TabIndex = 4;
+            this.CustomerCountRadio.TabStop = true;
+            this.CustomerCountRadio.Text = "Customer Count";
+            this.CustomerCountRadio.UseVisualStyleBackColor = true;
+            this.CustomerCountRadio.CheckedChanged += new System.EventHandler(this.CustomerCountRadio_CheckedChanged);
+            // 
+            // ConsultantSchedulesRadio
+            // 
+            this.ConsultantSchedulesRadio.AutoSize = true;
+            this.ConsultantSchedulesRadio.Location = new System.Drawing.Point(11, 398);
+            this.ConsultantSchedulesRadio.Name = "ConsultantSchedulesRadio";
+            this.ConsultantSchedulesRadio.Size = new System.Drawing.Size(170, 22);
+            this.ConsultantSchedulesRadio.TabIndex = 3;
+            this.ConsultantSchedulesRadio.TabStop = true;
+            this.ConsultantSchedulesRadio.Text = "Consultant Schedules";
+            this.ConsultantSchedulesRadio.UseVisualStyleBackColor = true;
+            this.ConsultantSchedulesRadio.CheckedChanged += new System.EventHandler(this.ConsultantSchedulesRadio_CheckedChanged);
+            // 
+            // AppointmentsByTypeRadio
+            // 
+            this.AppointmentsByTypeRadio.AutoSize = true;
+            this.AppointmentsByTypeRadio.Location = new System.Drawing.Point(11, 370);
+            this.AppointmentsByTypeRadio.Name = "AppointmentsByTypeRadio";
+            this.AppointmentsByTypeRadio.Size = new System.Drawing.Size(245, 22);
+            this.AppointmentsByTypeRadio.TabIndex = 2;
+            this.AppointmentsByTypeRadio.TabStop = true;
+            this.AppointmentsByTypeRadio.Text = "Number of Appointments by Type";
+            this.AppointmentsByTypeRadio.UseVisualStyleBackColor = true;
+            this.AppointmentsByTypeRadio.CheckedChanged += new System.EventHandler(this.AppointmentsByTypeRadio_CheckedChanged);
+            // 
             // GenerateReportBtn
             // 
             this.GenerateReportBtn.Location = new System.Drawing.Point(704, 380);
@@ -232,6 +287,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.GenerateReportBtn.TabIndex = 1;
             this.GenerateReportBtn.Text = "Generate Report";
             this.GenerateReportBtn.UseVisualStyleBackColor = true;
+            this.GenerateReportBtn.Click += new System.EventHandler(this.GenerateReportBtn_Click);
             // 
             // ReportsDGV
             // 
@@ -261,52 +317,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.LogOutBtn.TabIndex = 2;
             this.LogOutBtn.Text = "Log Out";
             this.LogOutBtn.UseVisualStyleBackColor = true;
-            this.LogOutBtn.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // AppointmentsByTypeRadio
-            // 
-            this.AppointmentsByTypeRadio.AutoSize = true;
-            this.AppointmentsByTypeRadio.Location = new System.Drawing.Point(11, 370);
-            this.AppointmentsByTypeRadio.Name = "AppointmentsByTypeRadio";
-            this.AppointmentsByTypeRadio.Size = new System.Drawing.Size(245, 22);
-            this.AppointmentsByTypeRadio.TabIndex = 2;
-            this.AppointmentsByTypeRadio.TabStop = true;
-            this.AppointmentsByTypeRadio.Text = "Number of Appointments by Type";
-            this.AppointmentsByTypeRadio.UseVisualStyleBackColor = true;
-            // 
-            // ConsultantSchedulesRadio
-            // 
-            this.ConsultantSchedulesRadio.AutoSize = true;
-            this.ConsultantSchedulesRadio.Location = new System.Drawing.Point(11, 398);
-            this.ConsultantSchedulesRadio.Name = "ConsultantSchedulesRadio";
-            this.ConsultantSchedulesRadio.Size = new System.Drawing.Size(170, 22);
-            this.ConsultantSchedulesRadio.TabIndex = 3;
-            this.ConsultantSchedulesRadio.TabStop = true;
-            this.ConsultantSchedulesRadio.Text = "Consultant Schedules";
-            this.ConsultantSchedulesRadio.UseVisualStyleBackColor = true;
-            // 
-            // CustomerCountRadio
-            // 
-            this.CustomerCountRadio.AutoSize = true;
-            this.CustomerCountRadio.Location = new System.Drawing.Point(272, 370);
-            this.CustomerCountRadio.Name = "CustomerCountRadio";
-            this.CustomerCountRadio.Size = new System.Drawing.Size(136, 22);
-            this.CustomerCountRadio.TabIndex = 4;
-            this.CustomerCountRadio.TabStop = true;
-            this.CustomerCountRadio.Text = "Customer Count";
-            this.CustomerCountRadio.UseVisualStyleBackColor = true;
-            // 
-            // AllAppointmentsRadio
-            // 
-            this.AllAppointmentsRadio.AutoSize = true;
-            this.AllAppointmentsRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.AllAppointmentsRadio.Location = new System.Drawing.Point(13, 353);
-            this.AllAppointmentsRadio.Name = "AllAppointmentsRadio";
-            this.AllAppointmentsRadio.Size = new System.Drawing.Size(131, 21);
-            this.AllAppointmentsRadio.TabIndex = 6;
-            this.AllAppointmentsRadio.TabStop = true;
-            this.AllAppointmentsRadio.Text = "All Appointments";
-            this.AllAppointmentsRadio.UseVisualStyleBackColor = true;
+            this.LogOutBtn.Click += new System.EventHandler(this.LogOutBtn_Click);
             // 
             // Dashboard
             // 

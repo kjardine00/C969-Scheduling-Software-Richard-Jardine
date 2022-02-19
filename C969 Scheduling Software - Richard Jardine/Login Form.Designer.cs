@@ -102,8 +102,9 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.ExitBtn.TabIndex = 6;
             this.ExitBtn.Text = "Exit";
             this.ExitBtn.UseVisualStyleBackColor = true;
+            this.ExitBtn.Click += new System.EventHandler(this.ExitBtn_Click);
             // 
-            // Form1
+            // LoginForm
             // 
             this.ClientSize = new System.Drawing.Size(262, 275);
             this.Controls.Add(this.ExitBtn);
@@ -113,7 +114,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.Controls.Add(this.UsernameTextBox);
             this.Controls.Add(this.UsernameLabel);
             this.Controls.Add(this.TitleLabel);
-            this.Name = "Form1";
+            this.Name = "LoginForm";
             this.Text = "Login";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -122,7 +123,6 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.Label UsernameLabel;
         private System.Windows.Forms.TextBox UsernameTextBox;

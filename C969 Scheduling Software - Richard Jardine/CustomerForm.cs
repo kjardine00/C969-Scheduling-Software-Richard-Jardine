@@ -12,9 +12,30 @@ namespace C969_Scheduling_Software___Richard_Jardine
 {
     public partial class CustomerForm : Form
     {
-        public CustomerForm()
+        public CustomerForm(bool NewCustomer)
         {
             InitializeComponent();
+
+            if (NewCustomer == true)
+            {
+                CustomerTitle.Text = "New Customer";
+
+                
+            }
+            else
+            {
+                CustomerTitle.Text = "Update Customer";
+
+                //CustNameText.Text =
+                //CustAddress1Text.Text =
+                //CustAddress1Text.Text = 
+                //CustCityText.Text =
+                //CustCountryText.Text =
+                //CustPostalCodeText.Text =
+                //CustPhoneText.Text =
+
+
+            }
         }
 
         private void CustSaveBtn_Click(object sender, EventArgs e)
@@ -24,7 +45,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
         private void CustCancelBtn_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
     }
 }

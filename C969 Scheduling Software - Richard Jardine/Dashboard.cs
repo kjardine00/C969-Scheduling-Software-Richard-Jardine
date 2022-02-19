@@ -17,12 +17,42 @@ namespace C969_Scheduling_Software___Richard_Jardine
             InitializeComponent();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void AddNewCustBtn_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void AppointmentTab_Click(object sender, EventArgs e)
+        private void UpdateCustBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DeleteCustBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddNewAppointmentBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UpdateAppointmentBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DeleteAppointmentBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AllAppointmentsRadio_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ByWeekRadio_CheckedChanged(object sender, EventArgs e)
         {
 
         }
@@ -30,6 +60,31 @@ namespace C969_Scheduling_Software___Richard_Jardine
         private void ByMonthRadio_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void AppointmentsByTypeRadio_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ConsultantSchedulesRadio_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CustomerCountRadio_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GenerateReportBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LogOutBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
