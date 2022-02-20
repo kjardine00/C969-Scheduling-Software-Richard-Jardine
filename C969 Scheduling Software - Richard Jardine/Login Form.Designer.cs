@@ -35,7 +35,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.PasswordTextBox = new System.Windows.Forms.TextBox();
             this.PasswordLabel = new System.Windows.Forms.Label();
             this.LoginBtn = new System.Windows.Forms.Button();
-            this.ExitBtn = new System.Windows.Forms.Button();
+            this.CloseBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TitleLabel
@@ -94,20 +94,20 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.LoginBtn.UseVisualStyleBackColor = true;
             this.LoginBtn.Click += new System.EventHandler(this.LoginBtn_Click);
             // 
-            // ExitBtn
+            // CloseBtn
             // 
-            this.ExitBtn.Location = new System.Drawing.Point(130, 195);
-            this.ExitBtn.Name = "ExitBtn";
-            this.ExitBtn.Size = new System.Drawing.Size(78, 33);
-            this.ExitBtn.TabIndex = 6;
-            this.ExitBtn.Text = "Exit";
-            this.ExitBtn.UseVisualStyleBackColor = true;
-            this.ExitBtn.Click += new System.EventHandler(this.ExitBtn_Click);
+            this.CloseBtn.Location = new System.Drawing.Point(130, 195);
+            this.CloseBtn.Name = "CloseBtn";
+            this.CloseBtn.Size = new System.Drawing.Size(78, 33);
+            this.CloseBtn.TabIndex = 6;
+            this.CloseBtn.Text = "Close";
+            this.CloseBtn.UseVisualStyleBackColor = true;
+            this.CloseBtn.Click += new System.EventHandler(this.ExitBtn_Click);
             // 
             // LoginForm
             // 
             this.ClientSize = new System.Drawing.Size(262, 275);
-            this.Controls.Add(this.ExitBtn);
+            this.Controls.Add(this.CloseBtn);
             this.Controls.Add(this.LoginBtn);
             this.Controls.Add(this.PasswordLabel);
             this.Controls.Add(this.PasswordTextBox);
@@ -129,7 +129,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
         private System.Windows.Forms.TextBox PasswordTextBox;
         private System.Windows.Forms.Label PasswordLabel;
         private System.Windows.Forms.Button LoginBtn;
-        private System.Windows.Forms.Button ExitBtn;
+        private System.Windows.Forms.Button CloseBtn;
     }
 }
 

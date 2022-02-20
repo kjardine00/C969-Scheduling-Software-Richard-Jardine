@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace C969_Scheduling_Software___Richard_Jardine
 {
@@ -20,7 +21,44 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
         private void Show_correct_lang()
         {
+            CultureInfo currentCulture = CultureInfo.CurrentCulture;
 
+            //MessageBox.Show(currentCulture.TwoLetterISOLanguageName.ToString());
+
+            switch (currentCulture.TwoLetterISOLanguageName)
+            {
+                case "en":
+                    displayEng();
+                    break;
+
+                case "nl":
+                    displayDutch();
+                    break;
+
+                default:
+                    displayEng();
+                    break;
+            }
+        }
+
+        private void displayEng()
+        {
+            this.Text = "Login";
+            TitleLabel.Text = "Scheduler Assistant";
+            UsernameLabel.Text = "Username";
+            PasswordLabel.Text = "Password";
+            LoginBtn.Text = "Login";
+            CloseBtn.Text = "Close";
+        }
+
+        private void displayDutch()
+        {
+            this.Text = "Log In";
+            TitleLabel.Text = "Planner Assistent";
+            UsernameLabel.Text = "Gebruikersnaam";
+            PasswordLabel.Text = "Wachtwoord";
+            LoginBtn.Text = "Log in";
+            CloseBtn.Text = "Afmeleden";
         }
 
         private void LoginBtn_Click(object sender, EventArgs e)
