@@ -23,8 +23,6 @@ namespace C969_Scheduling_Software___Richard_Jardine
         {
             CultureInfo currentCulture = CultureInfo.CurrentCulture;
 
-            //MessageBox.Show(currentCulture.TwoLetterISOLanguageName.ToString());
-
             switch (currentCulture.TwoLetterISOLanguageName)
             {
                 case "en":
@@ -63,12 +61,12 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
         private void LoginBtn_Click(object sender, EventArgs e)
         {
-            Data_Procedures data = new Data_Procedures();
+            Customer_DataProcedures data = new Customer_DataProcedures();
             User currentUser = new User(UsernameTextBox.Text, PasswordTextBox.Text);
 
-            if (data.verifyUser(currentUser) == true)
+            if (data.VerifyUser(currentUser) == true)
             {
-                this.Close();
+                this.Hide();
                 new Dashboard().ShowDialog();
             }
             else

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace C969_Scheduling_Software___Richard_Jardine.Objects
+namespace C969_Scheduling_Software___Richard_Jardine.Appointment
 {
-    class Appointments
+    class Appointment_DataProcedures
     {
     }
 }

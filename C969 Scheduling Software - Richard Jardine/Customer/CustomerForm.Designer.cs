@@ -46,6 +46,8 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.CustPhone = new System.Windows.Forms.Label();
             this.CustSaveBtn = new System.Windows.Forms.Button();
             this.CustCancelBtn = new System.Windows.Forms.Button();
+            this.CustIDLabel = new System.Windows.Forms.Label();
+            this.CustIDText = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // CustomerTitle
@@ -60,42 +62,42 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // 
             // CustNameText
             // 
-            this.CustNameText.Location = new System.Drawing.Point(97, 66);
+            this.CustNameText.Location = new System.Drawing.Point(97, 92);
             this.CustNameText.Name = "CustNameText";
             this.CustNameText.Size = new System.Drawing.Size(177, 20);
             this.CustNameText.TabIndex = 1;
             // 
             // CustAddress1Text
             // 
-            this.CustAddress1Text.Location = new System.Drawing.Point(97, 93);
+            this.CustAddress1Text.Location = new System.Drawing.Point(97, 119);
             this.CustAddress1Text.Name = "CustAddress1Text";
             this.CustAddress1Text.Size = new System.Drawing.Size(177, 20);
             this.CustAddress1Text.TabIndex = 2;
             // 
             // CustAddress2Text
             // 
-            this.CustAddress2Text.Location = new System.Drawing.Point(97, 120);
+            this.CustAddress2Text.Location = new System.Drawing.Point(97, 146);
             this.CustAddress2Text.Name = "CustAddress2Text";
             this.CustAddress2Text.Size = new System.Drawing.Size(177, 20);
             this.CustAddress2Text.TabIndex = 3;
             // 
             // CustCityText
             // 
-            this.CustCityText.Location = new System.Drawing.Point(97, 147);
+            this.CustCityText.Location = new System.Drawing.Point(97, 173);
             this.CustCityText.Name = "CustCityText";
             this.CustCityText.Size = new System.Drawing.Size(177, 20);
             this.CustCityText.TabIndex = 4;
             // 
             // CustCountryText
             // 
-            this.CustCountryText.Location = new System.Drawing.Point(97, 174);
+            this.CustCountryText.Location = new System.Drawing.Point(97, 200);
             this.CustCountryText.Name = "CustCountryText";
             this.CustCountryText.Size = new System.Drawing.Size(177, 20);
             this.CustCountryText.TabIndex = 5;
             // 
             // CustPostalCodeText
             // 
-            this.CustPostalCodeText.Location = new System.Drawing.Point(97, 201);
+            this.CustPostalCodeText.Location = new System.Drawing.Point(97, 227);
             this.CustPostalCodeText.Name = "CustPostalCodeText";
             this.CustPostalCodeText.Size = new System.Drawing.Size(177, 20);
             this.CustPostalCodeText.TabIndex = 6;
@@ -103,7 +105,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // CustName
             // 
             this.CustName.AutoSize = true;
-            this.CustName.Location = new System.Drawing.Point(56, 69);
+            this.CustName.Location = new System.Drawing.Point(56, 95);
             this.CustName.Name = "CustName";
             this.CustName.Size = new System.Drawing.Size(35, 13);
             this.CustName.TabIndex = 7;
@@ -112,7 +114,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // CustAddress1
             // 
             this.CustAddress1.AutoSize = true;
-            this.CustAddress1.Location = new System.Drawing.Point(14, 96);
+            this.CustAddress1.Location = new System.Drawing.Point(14, 122);
             this.CustAddress1.Name = "CustAddress1";
             this.CustAddress1.Size = new System.Drawing.Size(77, 13);
             this.CustAddress1.TabIndex = 8;
@@ -121,7 +123,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // CustAddress2
             // 
             this.CustAddress2.AutoSize = true;
-            this.CustAddress2.Location = new System.Drawing.Point(14, 123);
+            this.CustAddress2.Location = new System.Drawing.Point(14, 149);
             this.CustAddress2.Name = "CustAddress2";
             this.CustAddress2.Size = new System.Drawing.Size(77, 13);
             this.CustAddress2.TabIndex = 9;
@@ -130,7 +132,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // CustCity
             // 
             this.CustCity.AutoSize = true;
-            this.CustCity.Location = new System.Drawing.Point(67, 150);
+            this.CustCity.Location = new System.Drawing.Point(67, 176);
             this.CustCity.Name = "CustCity";
             this.CustCity.Size = new System.Drawing.Size(24, 13);
             this.CustCity.TabIndex = 10;
@@ -139,7 +141,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // CustCountry
             // 
             this.CustCountry.AutoSize = true;
-            this.CustCountry.Location = new System.Drawing.Point(48, 177);
+            this.CustCountry.Location = new System.Drawing.Point(48, 203);
             this.CustCountry.Name = "CustCountry";
             this.CustCountry.Size = new System.Drawing.Size(43, 13);
             this.CustCountry.TabIndex = 11;
@@ -148,7 +150,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // CustPostalCode
             // 
             this.CustPostalCode.AutoSize = true;
-            this.CustPostalCode.Location = new System.Drawing.Point(27, 204);
+            this.CustPostalCode.Location = new System.Drawing.Point(27, 230);
             this.CustPostalCode.Name = "CustPostalCode";
             this.CustPostalCode.Size = new System.Drawing.Size(64, 13);
             this.CustPostalCode.TabIndex = 12;
@@ -156,7 +158,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // 
             // CustPhoneText
             // 
-            this.CustPhoneText.Location = new System.Drawing.Point(97, 228);
+            this.CustPhoneText.Location = new System.Drawing.Point(97, 254);
             this.CustPhoneText.Name = "CustPhoneText";
             this.CustPhoneText.Size = new System.Drawing.Size(177, 20);
             this.CustPhoneText.TabIndex = 13;
@@ -164,7 +166,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // CustPhone
             // 
             this.CustPhone.AutoSize = true;
-            this.CustPhone.Location = new System.Drawing.Point(53, 231);
+            this.CustPhone.Location = new System.Drawing.Point(53, 257);
             this.CustPhone.Name = "CustPhone";
             this.CustPhone.Size = new System.Drawing.Size(38, 13);
             this.CustPhone.TabIndex = 14;
@@ -190,11 +192,31 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.CustCancelBtn.UseVisualStyleBackColor = true;
             this.CustCancelBtn.Click += new System.EventHandler(this.CustCancelBtn_Click);
             // 
+            // CustIDLabel
+            // 
+            this.CustIDLabel.AutoSize = true;
+            this.CustIDLabel.Location = new System.Drawing.Point(26, 69);
+            this.CustIDLabel.Name = "CustIDLabel";
+            this.CustIDLabel.Size = new System.Drawing.Size(65, 13);
+            this.CustIDLabel.TabIndex = 17;
+            this.CustIDLabel.Text = "Customer ID";
+            // 
+            // CustIDText
+            // 
+            this.CustIDText.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.CustIDText.Location = new System.Drawing.Point(97, 66);
+            this.CustIDText.Name = "CustIDText";
+            this.CustIDText.ReadOnly = true;
+            this.CustIDText.Size = new System.Drawing.Size(177, 20);
+            this.CustIDText.TabIndex = 18;
+            // 
             // CustomerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(295, 346);
+            this.Controls.Add(this.CustIDText);
+            this.Controls.Add(this.CustIDLabel);
             this.Controls.Add(this.CustCancelBtn);
             this.Controls.Add(this.CustSaveBtn);
             this.Controls.Add(this.CustPhone);
@@ -238,5 +260,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
         private System.Windows.Forms.Label CustPhone;
         private System.Windows.Forms.Button CustSaveBtn;
         private System.Windows.Forms.Button CustCancelBtn;
+        private System.Windows.Forms.Label CustIDLabel;
+        private System.Windows.Forms.TextBox CustIDText;
     }
 }

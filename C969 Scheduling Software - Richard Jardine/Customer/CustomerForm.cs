@@ -12,29 +12,30 @@ namespace C969_Scheduling_Software___Richard_Jardine
 {
     public partial class CustomerForm : Form
     {
-        public CustomerForm(bool NewCustomer)
+        public CustomerForm(bool NewCustomer, int CustID)
         {
             InitializeComponent();
+            Customer_DataProcedures data = new Customer_DataProcedures();
 
             if (NewCustomer == true)
             {
                 CustomerTitle.Text = "New Customer";
-
-                
+                CustIDText.Text = CustID.ToString();
             }
             else
             {
                 CustomerTitle.Text = "Update Customer";
 
-                //CustNameText.Text =
-                //CustAddress1Text.Text =
-                //CustAddress1Text.Text = 
-                //CustCityText.Text =
-                //CustCountryText.Text =
-                //CustPostalCodeText.Text =
-                //CustPhoneText.Text =
+                Customer selectedCustomer = data.UpdatedCustList(CustID);
 
-
+                CustIDText.Text = selectedCustomer.CustID.ToString();
+                CustNameText.Text = selectedCustomer.CustName;
+                CustAddress1Text.Text = selectedCustomer.CustAddress1;
+                CustAddress2Text.Text = selectedCustomer.CustAddress2;
+                CustCityText.Text = selectedCustomer.CustCity;
+                CustCountryText.Text = selectedCustomer.CustCountry;
+                CustPostalCodeText.Text = selectedCustomer.CustPostalCode;
+                CustPhoneText.Text = selectedCustomer.CustPhone;
             }
         }
 
@@ -47,5 +48,6 @@ namespace C969_Scheduling_Software___Richard_Jardine
         {
             this.Close();
         }
+
     }
 }
