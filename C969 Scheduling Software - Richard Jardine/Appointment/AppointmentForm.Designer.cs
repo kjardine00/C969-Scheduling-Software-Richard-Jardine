@@ -42,6 +42,8 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.AppointmentSaveBtn = new System.Windows.Forms.Button();
             this.AppointmentCancelBtn = new System.Windows.Forms.Button();
             this.AppointmentTypePickList = new System.Windows.Forms.ComboBox();
+            this.AppointmentEndDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.DateTimeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // AppointmentHeader
@@ -57,7 +59,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // AppointmentTitleLabel
             // 
             this.AppointmentTitleLabel.AutoSize = true;
-            this.AppointmentTitleLabel.Location = new System.Drawing.Point(14, 70);
+            this.AppointmentTitleLabel.Location = new System.Drawing.Point(14, 63);
             this.AppointmentTitleLabel.Name = "AppointmentTitleLabel";
             this.AppointmentTitleLabel.Size = new System.Drawing.Size(27, 13);
             this.AppointmentTitleLabel.TabIndex = 1;
@@ -65,7 +67,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // 
             // AppointmentTitleText
             // 
-            this.AppointmentTitleText.Location = new System.Drawing.Point(71, 67);
+            this.AppointmentTitleText.Location = new System.Drawing.Point(71, 60);
             this.AppointmentTitleText.Name = "AppointmentTitleText";
             this.AppointmentTitleText.Size = new System.Drawing.Size(202, 20);
             this.AppointmentTitleText.TabIndex = 2;
@@ -73,7 +75,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // AppointmentTypeLabel
             // 
             this.AppointmentTypeLabel.AutoSize = true;
-            this.AppointmentTypeLabel.Location = new System.Drawing.Point(14, 149);
+            this.AppointmentTypeLabel.Location = new System.Drawing.Point(14, 142);
             this.AppointmentTypeLabel.Name = "AppointmentTypeLabel";
             this.AppointmentTypeLabel.Size = new System.Drawing.Size(31, 13);
             this.AppointmentTypeLabel.TabIndex = 6;
@@ -82,7 +84,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // StartDateTimeLabel
             // 
             this.StartDateTimeLabel.AutoSize = true;
-            this.StartDateTimeLabel.Location = new System.Drawing.Point(14, 176);
+            this.StartDateTimeLabel.Location = new System.Drawing.Point(14, 169);
             this.StartDateTimeLabel.Name = "StartDateTimeLabel";
             this.StartDateTimeLabel.Size = new System.Drawing.Size(83, 13);
             this.StartDateTimeLabel.TabIndex = 7;
@@ -92,14 +94,14 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // 
             this.AppointmentStartDateTimePicker.CustomFormat = "02/17/2022 17:45";
             this.AppointmentStartDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.AppointmentStartDateTimePicker.Location = new System.Drawing.Point(103, 173);
+            this.AppointmentStartDateTimePicker.Location = new System.Drawing.Point(103, 166);
             this.AppointmentStartDateTimePicker.Name = "AppointmentStartDateTimePicker";
             this.AppointmentStartDateTimePicker.Size = new System.Drawing.Size(170, 20);
             this.AppointmentStartDateTimePicker.TabIndex = 8;
             // 
             // AppointmentUserIDText
             // 
-            this.AppointmentUserIDText.Location = new System.Drawing.Point(71, 93);
+            this.AppointmentUserIDText.Location = new System.Drawing.Point(71, 86);
             this.AppointmentUserIDText.Name = "AppointmentUserIDText";
             this.AppointmentUserIDText.Size = new System.Drawing.Size(202, 20);
             this.AppointmentUserIDText.TabIndex = 9;
@@ -107,7 +109,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // UserIDLabel
             // 
             this.UserIDLabel.AutoSize = true;
-            this.UserIDLabel.Location = new System.Drawing.Point(14, 96);
+            this.UserIDLabel.Location = new System.Drawing.Point(14, 89);
             this.UserIDLabel.Name = "UserIDLabel";
             this.UserIDLabel.Size = new System.Drawing.Size(43, 13);
             this.UserIDLabel.TabIndex = 10;
@@ -116,7 +118,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // AppointmentCustomerPickList
             // 
             this.AppointmentCustomerPickList.FormattingEnabled = true;
-            this.AppointmentCustomerPickList.Location = new System.Drawing.Point(71, 119);
+            this.AppointmentCustomerPickList.Location = new System.Drawing.Point(71, 112);
             this.AppointmentCustomerPickList.Name = "AppointmentCustomerPickList";
             this.AppointmentCustomerPickList.Size = new System.Drawing.Size(202, 21);
             this.AppointmentCustomerPickList.TabIndex = 11;
@@ -124,7 +126,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // AppointmentCustLabel
             // 
             this.AppointmentCustLabel.AutoSize = true;
-            this.AppointmentCustLabel.Location = new System.Drawing.Point(14, 122);
+            this.AppointmentCustLabel.Location = new System.Drawing.Point(14, 115);
             this.AppointmentCustLabel.Name = "AppointmentCustLabel";
             this.AppointmentCustLabel.Size = new System.Drawing.Size(51, 13);
             this.AppointmentCustLabel.TabIndex = 12;
@@ -153,16 +155,36 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // AppointmentTypePickList
             // 
             this.AppointmentTypePickList.FormattingEnabled = true;
-            this.AppointmentTypePickList.Location = new System.Drawing.Point(71, 146);
+            this.AppointmentTypePickList.Location = new System.Drawing.Point(71, 139);
             this.AppointmentTypePickList.Name = "AppointmentTypePickList";
             this.AppointmentTypePickList.Size = new System.Drawing.Size(202, 21);
             this.AppointmentTypePickList.TabIndex = 15;
+            // 
+            // AppointmentEndDateTimePicker
+            // 
+            this.AppointmentEndDateTimePicker.CustomFormat = "02/17/2022 17:45";
+            this.AppointmentEndDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.AppointmentEndDateTimePicker.Location = new System.Drawing.Point(103, 192);
+            this.AppointmentEndDateTimePicker.Name = "AppointmentEndDateTimePicker";
+            this.AppointmentEndDateTimePicker.Size = new System.Drawing.Size(170, 20);
+            this.AppointmentEndDateTimePicker.TabIndex = 17;
+            // 
+            // DateTimeLabel
+            // 
+            this.DateTimeLabel.AutoSize = true;
+            this.DateTimeLabel.Location = new System.Drawing.Point(14, 198);
+            this.DateTimeLabel.Name = "DateTimeLabel";
+            this.DateTimeLabel.Size = new System.Drawing.Size(80, 13);
+            this.DateTimeLabel.TabIndex = 16;
+            this.DateTimeLabel.Text = "End Date/Time";
             // 
             // AppointmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(299, 289);
+            this.Controls.Add(this.AppointmentEndDateTimePicker);
+            this.Controls.Add(this.DateTimeLabel);
             this.Controls.Add(this.AppointmentTypePickList);
             this.Controls.Add(this.AppointmentCancelBtn);
             this.Controls.Add(this.AppointmentSaveBtn);
@@ -199,5 +221,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
         private System.Windows.Forms.Button AppointmentSaveBtn;
         private System.Windows.Forms.Button AppointmentCancelBtn;
         private System.Windows.Forms.ComboBox AppointmentTypePickList;
+        private System.Windows.Forms.DateTimePicker AppointmentEndDateTimePicker;
+        private System.Windows.Forms.Label DateTimeLabel;
     }
 }

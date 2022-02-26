@@ -26,8 +26,11 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
         private void MainScreen_Load()
         {
-            Customer_DataProcedures data = new Customer_DataProcedures();
-            CustomerDGV.DataSource = data.CreateCustomerTable();
+            Customer_DataProcedures customerData = new Customer_DataProcedures();
+            CustomerDGV.DataSource = customerData.CreateCustomerTable();
+
+            Appointment_DataProcedures appointmentData = new Appointment_DataProcedures();
+            AppointmenttDGV.DataSource = appointmentData.CreateAppointmentTable();
         }
 
         private void AddNewCustBtn_Click(object sender, EventArgs e)

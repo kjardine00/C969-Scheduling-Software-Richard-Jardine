@@ -230,10 +230,17 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // 
             // AppointmenttDGV
             // 
+            this.AppointmenttDGV.AllowUserToAddRows = false;
+            this.AppointmenttDGV.AllowUserToDeleteRows = false;
+            this.AppointmenttDGV.AllowUserToResizeRows = false;
+            this.AppointmenttDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.AppointmenttDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.AppointmenttDGV.Dock = System.Windows.Forms.DockStyle.Top;
             this.AppointmenttDGV.Location = new System.Drawing.Point(3, 3);
+            this.AppointmenttDGV.MultiSelect = false;
             this.AppointmenttDGV.Name = "AppointmenttDGV";
+            this.AppointmenttDGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.AppointmenttDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.AppointmenttDGV.Size = new System.Drawing.Size(860, 344);
             this.AppointmenttDGV.TabIndex = 0;
             // 

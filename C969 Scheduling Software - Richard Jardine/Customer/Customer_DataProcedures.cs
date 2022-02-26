@@ -14,7 +14,6 @@ namespace C969_Scheduling_Software___Richard_Jardine
         MySqlDataAdapter dataAdapter = new MySqlDataAdapter();
         DataTable customerDashboard = new DataTable();
 
-
         public bool VerifyUser(User userInfo)
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
@@ -191,24 +190,3 @@ namespace C969_Scheduling_Software___Richard_Jardine
         }
     }
 }
-
-
-
-
-//{
-//    MySqlConnection conn = new MySqlConnection(connectionString);
-
-//    DataTable customerDashboard = new DataTable();
-
-//    try
-//    {
-//        conn.Open();
-//    }
-//    catch
-//    {
-
-//    }
-//    finally
-//    {
-//        conn.Close();
-//    }
