@@ -269,7 +269,6 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.CustomerCountRadio.TabStop = true;
             this.CustomerCountRadio.Text = "Customer Count";
             this.CustomerCountRadio.UseVisualStyleBackColor = true;
-            this.CustomerCountRadio.CheckedChanged += new System.EventHandler(this.CustomerCountRadio_CheckedChanged);
             // 
             // ConsultantSchedulesRadio
             // 
@@ -281,7 +280,6 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.ConsultantSchedulesRadio.TabStop = true;
             this.ConsultantSchedulesRadio.Text = "Consultant Schedules";
             this.ConsultantSchedulesRadio.UseVisualStyleBackColor = true;
-            this.ConsultantSchedulesRadio.CheckedChanged += new System.EventHandler(this.ConsultantSchedulesRadio_CheckedChanged);
             // 
             // AppointmentsByTypeRadio
             // 
@@ -293,7 +291,6 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.AppointmentsByTypeRadio.TabStop = true;
             this.AppointmentsByTypeRadio.Text = "Number of Appointments by Type";
             this.AppointmentsByTypeRadio.UseVisualStyleBackColor = true;
-            this.AppointmentsByTypeRadio.CheckedChanged += new System.EventHandler(this.AppointmentsByTypeRadio_CheckedChanged);
             // 
             // GenerateReportBtn
             // 

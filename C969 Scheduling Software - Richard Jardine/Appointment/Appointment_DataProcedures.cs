@@ -72,5 +72,91 @@ namespace C969_Scheduling_Software___Richard_Jardine
             return appointmentDashboard;
         }
 
+        public Appointments UpdatedAptList(int selectedID)
+        {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+
+            Appointments selectedApt = null;
+
+            try
+            {
+                conn.Open();
+
+                string query = "SELECT appointment.appointmentId, " +
+                    "appointment.title, " +
+                    "appointment.userId, " +
+                    "customer.customerName, " +
+                    "appointment.type, " +
+                    "appointment.start, " +
+                    "appointment.end " +
+                    "FROM appointment " +
+                    "INNER JOIN customer " +
+                    "ON appointment.customerId = customer.customerId " +
+                    "WHERE appointmentId = @ID";
+
+                MySqlCommand command = new MySqlCommand(query, conn);
+                command.Parameters.AddWithValue("@ID", selectedID);
+
+                using ( MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        selectedApt = new Appointments(
+                            Convert.ToInt32(reader["appointmentId"]),
+                            reader["title"].ToString(),
+                            Convert.ToInt32(reader["userId"]),
+                            reader["customerName"].ToString(),
+                            reader["type"].ToString(),
+                            Convert.ToDateTime(reader["start"]),
+                            Convert.ToDateTime(reader["end"]));
+                    }
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return selectedApt;
+        }
+
+
+        public List<string> GetCustomerNameList()
+        {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+
+            List<string> CustomerList = new List<string>();
+
+            try
+            {
+                conn.Open();
+
+                string query = "SELECT customerName FROM customer";
+
+                MySqlCommand command = new MySqlCommand(query, conn);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        CustomerList.Add(reader["customerName"].ToString());
+                    }
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally 
+            {
+                conn.Close();
+            }
+            return CustomerList;
+        }
     }
 }

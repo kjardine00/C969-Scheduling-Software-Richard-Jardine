@@ -41,9 +41,9 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.AppointmentCustLabel = new System.Windows.Forms.Label();
             this.AppointmentSaveBtn = new System.Windows.Forms.Button();
             this.AppointmentCancelBtn = new System.Windows.Forms.Button();
-            this.AppointmentTypePickList = new System.Windows.Forms.ComboBox();
             this.AppointmentEndDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.DateTimeLabel = new System.Windows.Forms.Label();
+            this.AppointmentTypeText = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // AppointmentHeader
@@ -152,14 +152,6 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.AppointmentCancelBtn.UseVisualStyleBackColor = true;
             this.AppointmentCancelBtn.Click += new System.EventHandler(this.AppointmentCancelBtn_Click);
             // 
-            // AppointmentTypePickList
-            // 
-            this.AppointmentTypePickList.FormattingEnabled = true;
-            this.AppointmentTypePickList.Location = new System.Drawing.Point(71, 139);
-            this.AppointmentTypePickList.Name = "AppointmentTypePickList";
-            this.AppointmentTypePickList.Size = new System.Drawing.Size(202, 21);
-            this.AppointmentTypePickList.TabIndex = 15;
-            // 
             // AppointmentEndDateTimePicker
             // 
             this.AppointmentEndDateTimePicker.CustomFormat = "02/17/2022 17:45";
@@ -178,14 +170,21 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.DateTimeLabel.TabIndex = 16;
             this.DateTimeLabel.Text = "End Date/Time";
             // 
+            // AppointmentTypeText
+            // 
+            this.AppointmentTypeText.Location = new System.Drawing.Point(71, 139);
+            this.AppointmentTypeText.Name = "AppointmentTypeText";
+            this.AppointmentTypeText.Size = new System.Drawing.Size(202, 20);
+            this.AppointmentTypeText.TabIndex = 18;
+            // 
             // AppointmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(299, 289);
+            this.Controls.Add(this.AppointmentTypeText);
             this.Controls.Add(this.AppointmentEndDateTimePicker);
             this.Controls.Add(this.DateTimeLabel);
-            this.Controls.Add(this.AppointmentTypePickList);
             this.Controls.Add(this.AppointmentCancelBtn);
             this.Controls.Add(this.AppointmentSaveBtn);
             this.Controls.Add(this.AppointmentCustLabel);
@@ -200,7 +199,6 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.Controls.Add(this.AppointmentHeader);
             this.Name = "AppointmentForm";
             this.Text = "AppointmentForm";
-            this.Load += new System.EventHandler(this.AppointmentForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -220,8 +218,8 @@ namespace C969_Scheduling_Software___Richard_Jardine
         private System.Windows.Forms.Label AppointmentCustLabel;
         private System.Windows.Forms.Button AppointmentSaveBtn;
         private System.Windows.Forms.Button AppointmentCancelBtn;
-        private System.Windows.Forms.ComboBox AppointmentTypePickList;
         private System.Windows.Forms.DateTimePicker AppointmentEndDateTimePicker;
         private System.Windows.Forms.Label DateTimeLabel;
+        private System.Windows.Forms.TextBox AppointmentTypeText;
     }
 }

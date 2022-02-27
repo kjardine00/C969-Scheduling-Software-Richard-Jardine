@@ -153,7 +153,6 @@ namespace C969_Scheduling_Software___Richard_Jardine
                             reader["phone"].ToString()
                             );
                     }
-
                     reader.Close();
                 }
             }

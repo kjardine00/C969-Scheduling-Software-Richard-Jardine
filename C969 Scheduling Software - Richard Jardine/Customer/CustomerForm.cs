@@ -41,7 +41,16 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
         private void CustSaveBtn_Click(object sender, EventArgs e)
         {
-
+            Customer customerToBeSaved = new Customer(
+                Convert.ToInt32(CustIDText.Text), 
+                CustNameText.Text, 
+                CustAddress1Text.Text, 
+                CustAddress2Text.Text, 
+                CustCityText.Text, 
+                CustCountryText.Text, 
+                CustPostalCodeText.Text, 
+                CustPhoneText.Text
+                );
         }
 
         private void CustCancelBtn_Click(object sender, EventArgs e)

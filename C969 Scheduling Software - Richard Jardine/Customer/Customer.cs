@@ -13,16 +13,12 @@ namespace C969_Scheduling_Software___Richard_Jardine
     {
         public int CustID { get; set; }
         public string CustName { get; set; }
-        //public int CustAddressID { get; set; }
         public string CustAddress1 { get; set; }
         public string CustAddress2 { get; set; }
-        //public int CustCityID { get; set; }
         public string CustCity { get; set; }
-       // public int CustCountryID { get; set; }
         public string CustCountry { get; set; }
         public string CustPostalCode { get; set; }
         public string CustPhone { get; set; }
-        //public int CustomerIDCount { get; set; }
 
         public Customer(int CID, string CName, string CAddress1, string CAddress2, string CCity, string CCountry, string CPostalCode, string CPhone)
         {
