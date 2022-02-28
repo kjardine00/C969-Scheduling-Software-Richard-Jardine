@@ -12,10 +12,14 @@ namespace C969_Scheduling_Software___Richard_Jardine
 {
     public partial class CustomerForm : Form
     {
+        private bool NewCust = false;
+
         public CustomerForm(bool NewCustomer, int CustID)
         {
             InitializeComponent();
             Customer_DataProcedures data = new Customer_DataProcedures();
+
+            NewCust = NewCustomer;
 
             if (NewCustomer == true)
             {
@@ -41,6 +45,8 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
         private void CustSaveBtn_Click(object sender, EventArgs e)
         {
+            Customer_DataProcedures data = new Customer_DataProcedures();
+
             Customer customerToBeSaved = new Customer(
                 Convert.ToInt32(CustIDText.Text), 
                 CustNameText.Text, 
@@ -51,6 +57,15 @@ namespace C969_Scheduling_Software___Richard_Jardine
                 CustPostalCodeText.Text, 
                 CustPhoneText.Text
                 );
+
+            if (NewCust == true)
+            {
+                data.SaveNewCustomer(customerToBeSaved);
+            }
+            else
+            {
+                data.SaveUpdatedCustomer(customerToBeSaved);
+            }
         }
 
         private void CustCancelBtn_Click(object sender, EventArgs e)

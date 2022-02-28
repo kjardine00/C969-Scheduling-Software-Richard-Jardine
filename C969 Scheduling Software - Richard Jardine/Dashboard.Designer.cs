@@ -42,7 +42,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.AddNewAppointmentBtn = new System.Windows.Forms.Button();
             this.ByMonthRadio = new System.Windows.Forms.RadioButton();
             this.ByWeekRadio = new System.Windows.Forms.RadioButton();
-            this.AppointmenttDGV = new System.Windows.Forms.DataGridView();
+            this.AppointmentDGV = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.CustomerCountRadio = new System.Windows.Forms.RadioButton();
             this.ConsultantSchedulesRadio = new System.Windows.Forms.RadioButton();
@@ -55,7 +55,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.CustomerTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CustomerDGV)).BeginInit();
             this.AppointmentTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.AppointmenttDGV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AppointmentDGV)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ReportsDGV)).BeginInit();
             this.SuspendLayout();
@@ -147,7 +147,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.AppointmentTab.Controls.Add(this.AddNewAppointmentBtn);
             this.AppointmentTab.Controls.Add(this.ByMonthRadio);
             this.AppointmentTab.Controls.Add(this.ByWeekRadio);
-            this.AppointmentTab.Controls.Add(this.AppointmenttDGV);
+            this.AppointmentTab.Controls.Add(this.AppointmentDGV);
             this.AppointmentTab.Location = new System.Drawing.Point(4, 27);
             this.AppointmentTab.Name = "AppointmentTab";
             this.AppointmentTab.Padding = new System.Windows.Forms.Padding(3);
@@ -228,21 +228,21 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.ByWeekRadio.UseVisualStyleBackColor = true;
             this.ByWeekRadio.CheckedChanged += new System.EventHandler(this.ByWeekRadio_CheckedChanged);
             // 
-            // AppointmenttDGV
+            // AppointmentDGV
             // 
-            this.AppointmenttDGV.AllowUserToAddRows = false;
-            this.AppointmenttDGV.AllowUserToDeleteRows = false;
-            this.AppointmenttDGV.AllowUserToResizeRows = false;
-            this.AppointmenttDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.AppointmenttDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.AppointmenttDGV.Dock = System.Windows.Forms.DockStyle.Top;
-            this.AppointmenttDGV.Location = new System.Drawing.Point(3, 3);
-            this.AppointmenttDGV.MultiSelect = false;
-            this.AppointmenttDGV.Name = "AppointmenttDGV";
-            this.AppointmenttDGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.AppointmenttDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.AppointmenttDGV.Size = new System.Drawing.Size(860, 344);
-            this.AppointmenttDGV.TabIndex = 0;
+            this.AppointmentDGV.AllowUserToAddRows = false;
+            this.AppointmentDGV.AllowUserToDeleteRows = false;
+            this.AppointmentDGV.AllowUserToResizeRows = false;
+            this.AppointmentDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.AppointmentDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.AppointmentDGV.Dock = System.Windows.Forms.DockStyle.Top;
+            this.AppointmentDGV.Location = new System.Drawing.Point(3, 3);
+            this.AppointmentDGV.MultiSelect = false;
+            this.AppointmentDGV.Name = "AppointmentDGV";
+            this.AppointmentDGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.AppointmentDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.AppointmentDGV.Size = new System.Drawing.Size(860, 344);
+            this.AppointmentDGV.TabIndex = 0;
             // 
             // tabPage3
             // 
@@ -347,7 +347,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             ((System.ComponentModel.ISupportInitialize)(this.CustomerDGV)).EndInit();
             this.AppointmentTab.ResumeLayout(false);
             this.AppointmentTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.AppointmenttDGV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AppointmentDGV)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ReportsDGV)).EndInit();
@@ -373,7 +373,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
         private System.Windows.Forms.Button AddNewAppointmentBtn;
         private System.Windows.Forms.RadioButton ByMonthRadio;
         private System.Windows.Forms.RadioButton ByWeekRadio;
-        private System.Windows.Forms.DataGridView AppointmenttDGV;
+        private System.Windows.Forms.DataGridView AppointmentDGV;
         private System.Windows.Forms.Button GenerateReportBtn;
         private System.Windows.Forms.DataGridView ReportsDGV;
         private System.Windows.Forms.RadioButton CustomerCountRadio;

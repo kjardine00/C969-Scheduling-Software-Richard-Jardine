@@ -31,7 +31,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             CustomerDGV.DataSource = customerData.CreateCustomerTable();
 
             Appointment_DataProcedures appointmentData = new Appointment_DataProcedures();
-            AppointmenttDGV.DataSource = appointmentData.CreateAppointmentTable();
+            AppointmentDGV.DataSource = appointmentData.CreateAppointmentTable();
 
             AllAppointmentsRadio.Checked = true;
             ByWeekRadio.Checked = false;
@@ -70,17 +70,16 @@ namespace C969_Scheduling_Software___Richard_Jardine
                 string selectedCustID = CustomerDGV.SelectedRows[0].Cells[0].Value.ToString();
                 int selectedCustIDint = Convert.ToInt32(selectedCustID);
 
-                DialogResult deletePartDialogResult = MessageBox.Show("Are you sure you would like to delete Customer ID: " + selectedCustID + "?", "Delete Part", MessageBoxButtons.YesNo);
+                DialogResult deleteCustDialogResult = MessageBox.Show("Are you sure you would like to delete Customer ID: " + selectedCustID + "?", "Delete Part", MessageBoxButtons.YesNo);
 
-                if (deletePartDialogResult == DialogResult.Yes)
+                if (deleteCustDialogResult == DialogResult.Yes)
                 {
-                    
+                    data.DeleteCustomer(selectedCustIDint);
                 }
                 else
                 {
                     // do nothing
                 }
-                
             }
             else
             {
@@ -95,9 +94,9 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
         private void UpdateAppointmentBtn_Click(object sender, EventArgs e)
         {
-            if (AppointmenttDGV.SelectedRows.Count > 0)
+            if (AppointmentDGV.SelectedRows.Count > 0)
             {
-                string selectedAptID = AppointmenttDGV.SelectedRows[0].Cells[0].Value.ToString();
+                string selectedAptID = AppointmentDGV.SelectedRows[0].Cells[0].Value.ToString();
 
                 int selectedCustIDint = Convert.ToInt32(selectedAptID);
 
@@ -111,7 +110,28 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
         private void DeleteAppointmentBtn_Click(object sender, EventArgs e)
         {
+            Appointment_DataProcedures data = new Appointment_DataProcedures();
 
+            if (CustomerDGV.SelectedRows.Count > 0)
+            {
+                string selectedAptID = AppointmentDGV.SelectedRows[0].Cells[0].Value.ToString();
+                int selectedCustIDint = Convert.ToInt32(selectedAptID);
+
+                DialogResult deleteAptDialogResult = MessageBox.Show("Are you sure you would like to delete Appointment ID: " + selectedAptID + "?", "Delete Part", MessageBoxButtons.YesNo);
+
+                if (deleteAptDialogResult == DialogResult.Yes)
+                {
+                    data.DeleteAppointment(selectedCustIDint);
+                }
+                else
+                {
+                    // do nothing
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a Customer you would like to Delete.");
+            }
         }
 
         private void AllAppointmentsRadio_CheckedChanged(object sender, EventArgs e)
@@ -134,7 +154,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             string monthEnd = DateTime.Today.AddDays(-Convert.ToDouble(DateTime.Now.Day - 1)).AddMonths(1).AddDays(-1).ToString();
 
             AppointmentDashboard.Filter = "Start Time >= #" + monthStart + "# and End Time <= #" + monthEnd + "#";
-            AppointmenttDGV.Refresh();
+            AppointmentDGV.Refresh();
             //This doesn't work
         }
 

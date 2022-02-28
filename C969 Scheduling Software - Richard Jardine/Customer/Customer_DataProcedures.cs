@@ -1,51 +1,13 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace C969_Scheduling_Software___Richard_Jardine
 {
     class Customer_DataProcedures
     {
-        private string connectionString = "Host=localhost; Port=3306; Database=client_schedule; Username=sqlUser; Password=Passw0rd!";
-        MySqlDataAdapter dataAdapter = new MySqlDataAdapter();
-        DataTable customerDashboard = new DataTable();
-
-        public bool VerifyUser(User userInfo)
-        {
-            MySqlConnection conn = new MySqlConnection(connectionString);
-
-            try
-            {
-                conn.Open();
-
-                MySqlCommand checkUserName = conn.CreateCommand();
-                checkUserName.CommandText = "SELECT userName FROM user WHERE userName = @username";
-                checkUserName.Parameters.AddWithValue("@username", userInfo.UserName);
-                string dbUsername = checkUserName.ExecuteScalar().ToString();
-
-                MySqlCommand checkPassword = conn.CreateCommand();
-                checkPassword.CommandText = "SELECT password FROM user WHERE BINARY password = @password AND userName = @username";
-                checkPassword.Parameters.AddWithValue("@password", userInfo.UserPassword);
-                checkPassword.Parameters.AddWithValue("@username", userInfo.UserName);
-                string dbPassword = checkPassword.ExecuteScalar().ToString();
-                return true;
-            }
-            catch (Exception)
-            {
-
-            }
-            finally
-            {
-                conn.Close();
-            }
-
-            return false;
-        }
-
+        private readonly string connectionString = "Host=localhost; Port=3306; Database=client_schedule; Username=sqlUser; Password=Passw0rd!";
+       
         public DataTable CreateCustomerTable()
         {
             Dashboard.CustIDCount = 1;
@@ -168,7 +130,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             return selectedCust;
         }
 
-        public void DeleteCustomer()
+        public void DeleteCustomer(int selectedCustID)
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
 
@@ -177,6 +139,53 @@ namespace C969_Scheduling_Software___Richard_Jardine
             try
             {
                 conn.Open();
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public void SaveNewCustomer(Customer customerToBeSaved)
+        {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+
+            DataTable customerDashboard = new DataTable();
+
+            try
+            {
+                conn.Open();
+
+                string query = "INSERT INTO";
+
+                MySqlCommand command = new MySqlCommand(query, conn);
+                //command.Parameters.AddWithValue("@ID", SelectedID);
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public void SaveUpdatedCustomer(Customer customerToBeSaved)
+        {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+
+            DataTable customerDashboard = new DataTable();
+
+            try
+            {
+                conn.Open();
+
+
             }
             catch
             {

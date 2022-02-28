@@ -124,7 +124,6 @@ namespace C969_Scheduling_Software___Richard_Jardine
             return selectedApt;
         }
 
-
         public List<string> GetCustomerNameList()
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
@@ -157,6 +156,11 @@ namespace C969_Scheduling_Software___Richard_Jardine
                 conn.Close();
             }
             return CustomerList;
+        }
+
+        public void DeleteAppointment(int appointmentId)
+        {
+
         }
     }
 }
