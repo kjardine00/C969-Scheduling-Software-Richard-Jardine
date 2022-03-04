@@ -16,9 +16,6 @@ namespace C969_Scheduling_Software___Richard_Jardine
         private BindingSource AppointmentDashboard = new BindingSource(); //These all do nothing need to figure out datetime filtering
         private BindingSource ReportsDashboard = new BindingSource();
 
-        public static int CustIDCount;
-        public static int AptIDCount;
-
         public Dashboard()
         {
             InitializeComponent();
@@ -40,7 +37,8 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
         private void AddNewCustBtn_Click(object sender, EventArgs e)
         {
-            new CustomerForm(true, CustIDCount).ShowDialog();
+            Admin_DataProcedures data = new Admin_DataProcedures();
+            new CustomerForm(true, data.CreateNewID("customer")).ShowDialog();
             MainScreen_Load();
         }
 
@@ -55,6 +53,8 @@ namespace C969_Scheduling_Software___Richard_Jardine
                 int selectedCustIDint = Convert.ToInt32(selectedCustID);
 
                 new CustomerForm(false, selectedCustIDint).ShowDialog();
+
+                MainScreen_Load();
             }
             else
             {
@@ -81,16 +81,20 @@ namespace C969_Scheduling_Software___Richard_Jardine
                 {
                     // do nothing
                 }
+                MainScreen_Load();
             }
             else
             {
                 MessageBox.Show("Please select a Customer you would like to Delete.");
             }
+
         }
 
         private void AddNewAppointmentBtn_Click(object sender, EventArgs e)
         {
-            new AppointmentForm(true, AptIDCount).ShowDialog();
+            //Appointment_DataProcedures data = new Appointment_DataProcedures();
+            //new AppointmentForm(true, data.CreateNewID("appointment")).ShowDialog();
+            //MainScreen_Load();
         }
 
         private void UpdateAppointmentBtn_Click(object sender, EventArgs e)

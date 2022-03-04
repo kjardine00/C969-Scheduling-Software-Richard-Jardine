@@ -61,7 +61,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
         private void LoginBtn_Click(object sender, EventArgs e)
         {
-            Login_DataProcedures data = new Login_DataProcedures();
+            Admin_DataProcedures data = new Admin_DataProcedures();
             User currentUser = new User(UsernameTextBox.Text, PasswordTextBox.Text);
 
             if (data.VerifyUser(currentUser) == true)

@@ -1,13 +1,12 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Data;
 
 namespace C969_Scheduling_Software___Richard_Jardine
 {
     class Customer_DataProcedures
     {
-        private static string connectionString = "Host=localhost; Port=3306; Database=client_schedule; Username=sqlUser; Password=Passw0rd!";
+        private static readonly string connectionString = "Host=localhost; Port=3306; Database=client_schedule; Username=sqlUser; Password=Passw0rd!";
        
         public DataTable CreateCustomerTable()
         {
@@ -28,7 +27,8 @@ namespace C969_Scheduling_Software___Richard_Jardine
             {
                 conn.Open();
 
-                string query = "SELECT customer.customerId, " +
+                string query = 
+                    "SELECT customer.customerId, " +
                     "customer.customerName, " +
                     "address.address, " +
                     "address.address2, " +
@@ -74,15 +74,14 @@ namespace C969_Scheduling_Software___Richard_Jardine
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
 
-            DataTable customerDashboard = new DataTable();
-
             Customer selectedCust = null;
 
             try
             {
                 conn.Open();
 
-                string query = "SELECT customer.customerId, " +
+                string query = 
+                    "SELECT customer.customerId, " +
                     "customer.customerName, " +
                     "address.address, " +
                     "address.address2, " +
@@ -137,6 +136,44 @@ namespace C969_Scheduling_Software___Richard_Jardine
             try
             {
                 conn.Open();
+
+                string query = 
+                    "DELETE FROM customer " +
+                    "WHERE customerId = @customerId ";
+
+                MySqlCommand command = new MySqlCommand(query, conn);
+                command.Parameters.AddWithValue("@customerId", selectedCustID);
+
+                string query2 = 
+                    "DELETE FROM address " +
+                    "WHERE addressId = " +
+                    "(SELECT addressId FROM customer WHERE customerId = @customerId) ";
+
+                MySqlCommand command2 = new MySqlCommand(query2, conn);
+                command2.Parameters.AddWithValue("@customerId", selectedCustID);
+
+                string query3 = 
+                    "DELETE FROM city " +
+                    "WHERE cityId = " +
+                    "(SELECT cityId FROM address WHERE addressId = " +
+                    "(SELECT addressId FROM customer WHERE customerId = @customerId));";
+
+                MySqlCommand command3 = new MySqlCommand(query3, conn);
+                command3.Parameters.AddWithValue("@customerId", selectedCustID);
+
+                string query4 = 
+                    "DELETE FROM country WHERE countryId = " +
+                    "(SELECT countryId FROM city WHERE cityId = " +
+                    "(SELECT cityId FROM address WHERE addressId = " +
+                    "(SELECT addressId FROM customer WHERE customerId = @customerId)));";
+
+                MySqlCommand command4 = new MySqlCommand(query4, conn);
+                command4.Parameters.AddWithValue("@customerId", selectedCustID);
+
+                command.ExecuteNonQuery();
+                command2.ExecuteNonQuery();
+                command3.ExecuteNonQuery();
+                command4.ExecuteNonQuery();
             }
             catch
             {
@@ -148,58 +185,21 @@ namespace C969_Scheduling_Software___Richard_Jardine
             }
         }
 
-        private static int NewID(List<int> idList)
-        {
-            int highestID = 0;
-
-            foreach(int id in idList)
-            {
-                if (id > highestID)
-                {
-                    highestID = id;
-                }
-            }
-            return highestID + 1;
-        }
-
-        public int CreateNewID(string table)
-        {
-            MySqlConnection conn = new MySqlConnection(connectionString);
-            conn.Open();
-
-
-            string query = $"SELECT {table + "Id"} FROM {table}";
-            MySqlCommand command = new MySqlCommand(query, conn);
-
-            MySqlDataReader reader = command.ExecuteReader();
-            List<int> idList = new List<int>();
-
-            while (reader.Read())
-            {
-                idList.Add(Convert.ToInt32(reader[0]));
-            }
-
-            reader.Close();
-            conn.Close();
-
-            return NewID(idList);
-        }
-
         public void SaveNewCustomer(Customer customerToBeSaved)
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
 
-            DataTable customerDashboard = new DataTable();
+            Admin_DataProcedures data = new Admin_DataProcedures();
 
             int custID = 0;
             int addressID = 0;
             int cityID = 0;
             int countryID = 0;
 
-            custID = CreateNewID("customer");
-            addressID = CreateNewID("address");
-            cityID = CreateNewID("city");
-            countryID = CreateNewID("country");
+            custID = data.CreateNewID("customer");
+            addressID = data.CreateNewID("address");
+            cityID = data.CreateNewID("city");
+            countryID = data.CreateNewID("country");
 
             try
             {
@@ -262,13 +262,59 @@ namespace C969_Scheduling_Software___Richard_Jardine
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
 
-            DataTable customerDashboard = new DataTable();
-
             try
             {
                 conn.Open();
 
+                string query = 
+                    "UPDATE customer " +
+                    "SET customerName = @customerName " +
+                    "WHERE customerId = @currentCustomerId";
 
+                MySqlCommand command = new MySqlCommand(query, conn);
+                command.Parameters.AddWithValue("@customerName", customerToBeSaved.CustName);
+                command.Parameters.AddWithValue("@currentCustomerId", customerToBeSaved.CustID);
+
+                string query2 =
+                    "UPDATE address " +
+                    "SET address = @address, address2 = @address2, postalCode = @postalCode, phone = @phone " +
+                    "WHERE addressId = " +
+                    "(SELECT addressId FROM customer WHERE customerId = @custID)";
+
+                MySqlCommand command2 = new MySqlCommand(query2, conn);
+                command2.Parameters.AddWithValue("@address", customerToBeSaved.CustAddress1);
+                command2.Parameters.AddWithValue("@address2", customerToBeSaved.CustAddress2);
+                command2.Parameters.AddWithValue("@postalCode", customerToBeSaved.CustPostalCode);
+                command2.Parameters.AddWithValue("@phone", customerToBeSaved.CustPhone);
+                command2.Parameters.AddWithValue("@custID", customerToBeSaved.CustID);
+
+                string query3 =
+                    "UPDATE city " +
+                    "SET city = @city " +
+                    "WHERE cityId = " +
+                    "(SELECT cityId FROM address WHERE addressId = " +
+                    "(SELECT addressId FROM customer WHERE customerId = @custID));";
+
+                MySqlCommand command3 = new MySqlCommand(query3, conn);
+                command3.Parameters.AddWithValue("@city", customerToBeSaved.CustCity);
+                command3.Parameters.AddWithValue("@custID", customerToBeSaved.CustID);
+
+                string query4 =
+                    "INSERT INTO country " +
+                    "SET country = @country " +
+                    "WHERE countryId = " +
+                    "(SELECT countryId FROM city WHERE cityId = " +
+                    "(SELECT cityId FROM address WHERE addressId = " +
+                    "(SELECT addressId FROM customer WHERE customerId = @custID)));";
+
+                MySqlCommand command4 = new MySqlCommand(query4, conn);
+                command4.Parameters.AddWithValue("@country", customerToBeSaved.CustCountry);
+                command4.Parameters.AddWithValue("@custID", customerToBeSaved.CustID);
+
+                command.ExecuteNonQuery();
+                command2.ExecuteNonQuery();
+                command3.ExecuteNonQuery();
+                command4.ExecuteNonQuery();
             }
             catch
             {

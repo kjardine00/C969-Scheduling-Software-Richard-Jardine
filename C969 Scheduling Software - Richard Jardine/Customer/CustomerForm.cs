@@ -17,20 +17,21 @@ namespace C969_Scheduling_Software___Richard_Jardine
         public CustomerForm(bool NewCustomer, int CustID)
         {
             InitializeComponent();
-            Customer_DataProcedures data = new Customer_DataProcedures();
+            Admin_DataProcedures Adata = new Admin_DataProcedures();
+            Customer_DataProcedures Cdata = new Customer_DataProcedures();
 
             NewCust = NewCustomer;
 
             if (NewCustomer == true)
             {
                 CustomerTitle.Text = "New Customer";
-                CustIDText.Text = data.CreateNewID("customer").ToString();
+                CustIDText.Text = Adata.CreateNewID("customer").ToString();
             }
             else
             {
                 CustomerTitle.Text = "Update Customer";
 
-                Customer selectedCustomer = data.UpdatedCustList(CustID);
+                Customer selectedCustomer = Cdata.UpdatedCustList(CustID);
 
                 CustIDText.Text = selectedCustomer.CustID.ToString();
                 CustNameText.Text = selectedCustomer.CustName;
