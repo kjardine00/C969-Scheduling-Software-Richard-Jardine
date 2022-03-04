@@ -129,9 +129,11 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.CustomerDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.CustomerDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CustomerDGV.Dock = System.Windows.Forms.DockStyle.Top;
+            this.CustomerDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.CustomerDGV.Location = new System.Drawing.Point(3, 3);
             this.CustomerDGV.MultiSelect = false;
             this.CustomerDGV.Name = "CustomerDGV";
+            this.CustomerDGV.ReadOnly = true;
             this.CustomerDGV.RowHeadersVisible = false;
             this.CustomerDGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.CustomerDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -239,6 +241,8 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.AppointmentDGV.Location = new System.Drawing.Point(3, 3);
             this.AppointmentDGV.MultiSelect = false;
             this.AppointmentDGV.Name = "AppointmentDGV";
+            this.AppointmentDGV.ReadOnly = true;
+            this.AppointmentDGV.RowHeadersVisible = false;
             this.AppointmentDGV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.AppointmentDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.AppointmentDGV.Size = new System.Drawing.Size(860, 344);
@@ -307,7 +311,10 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.ReportsDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ReportsDGV.Dock = System.Windows.Forms.DockStyle.Top;
             this.ReportsDGV.Location = new System.Drawing.Point(3, 3);
+            this.ReportsDGV.MultiSelect = false;
             this.ReportsDGV.Name = "ReportsDGV";
+            this.ReportsDGV.ReadOnly = true;
+            this.ReportsDGV.RowHeadersVisible = false;
             this.ReportsDGV.Size = new System.Drawing.Size(860, 344);
             this.ReportsDGV.TabIndex = 0;
             // 

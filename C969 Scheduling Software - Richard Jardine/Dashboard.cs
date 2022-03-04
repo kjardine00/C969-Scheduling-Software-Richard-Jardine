@@ -41,6 +41,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
         private void AddNewCustBtn_Click(object sender, EventArgs e)
         {
             new CustomerForm(true, CustIDCount).ShowDialog();
+            MainScreen_Load();
         }
 
         private void UpdateCustBtn_Click(object sender, EventArgs e)

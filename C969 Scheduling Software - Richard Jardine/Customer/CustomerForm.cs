@@ -24,7 +24,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             if (NewCustomer == true)
             {
                 CustomerTitle.Text = "New Customer";
-                CustIDText.Text = CustID.ToString();
+                CustIDText.Text = data.CreateNewID("customer").ToString();
             }
             else
             {
@@ -47,6 +47,8 @@ namespace C969_Scheduling_Software___Richard_Jardine
         {
             Customer_DataProcedures data = new Customer_DataProcedures();
 
+            
+
             Customer customerToBeSaved = new Customer(
                 Convert.ToInt32(CustIDText.Text), 
                 CustNameText.Text, 
@@ -66,6 +68,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             {
                 data.SaveUpdatedCustomer(customerToBeSaved);
             }
+            Close();
         }
 
         private void CustCancelBtn_Click(object sender, EventArgs e)

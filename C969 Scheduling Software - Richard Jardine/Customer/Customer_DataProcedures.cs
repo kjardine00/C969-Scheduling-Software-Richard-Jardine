@@ -1,17 +1,16 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace C969_Scheduling_Software___Richard_Jardine
 {
     class Customer_DataProcedures
     {
-        private readonly string connectionString = "Host=localhost; Port=3306; Database=client_schedule; Username=sqlUser; Password=Passw0rd!";
+        private static string connectionString = "Host=localhost; Port=3306; Database=client_schedule; Username=sqlUser; Password=Passw0rd!";
        
         public DataTable CreateCustomerTable()
         {
-            Dashboard.CustIDCount = 1;
-
             MySqlConnection conn = new MySqlConnection(connectionString);
 
             DataTable customerDashboard = new DataTable();
@@ -56,7 +55,6 @@ namespace C969_Scheduling_Software___Richard_Jardine
                             reader["country"], 
                             reader["postalCode"], 
                             reader["phone"]);
-                        Dashboard.CustIDCount++;
                     }
                 }
             }
@@ -150,20 +148,105 @@ namespace C969_Scheduling_Software___Richard_Jardine
             }
         }
 
+        private static int NewID(List<int> idList)
+        {
+            int highestID = 0;
+
+            foreach(int id in idList)
+            {
+                if (id > highestID)
+                {
+                    highestID = id;
+                }
+            }
+            return highestID + 1;
+        }
+
+        public int CreateNewID(string table)
+        {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+
+
+            string query = $"SELECT {table + "Id"} FROM {table}";
+            MySqlCommand command = new MySqlCommand(query, conn);
+
+            MySqlDataReader reader = command.ExecuteReader();
+            List<int> idList = new List<int>();
+
+            while (reader.Read())
+            {
+                idList.Add(Convert.ToInt32(reader[0]));
+            }
+
+            reader.Close();
+            conn.Close();
+
+            return NewID(idList);
+        }
+
         public void SaveNewCustomer(Customer customerToBeSaved)
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
 
             DataTable customerDashboard = new DataTable();
 
+            int custID = 0;
+            int addressID = 0;
+            int cityID = 0;
+            int countryID = 0;
+
+            custID = CreateNewID("customer");
+            addressID = CreateNewID("address");
+            cityID = CreateNewID("city");
+            countryID = CreateNewID("country");
+
             try
             {
                 conn.Open();
 
-                string query = "INSERT INTO";
+                string query =
+                    "INSERT INTO customer (customerId, customerName, addressId, active, createDate, createdBy, lastUpdateBy) " +
+                    "VALUES (@ID, @custName, @AddressID, 1, NOW(), 'SystemAdd', 'SystemAdd');";
 
                 MySqlCommand command = new MySqlCommand(query, conn);
-                //command.Parameters.AddWithValue("@ID", SelectedID);
+                command.Parameters.AddWithValue("@ID", custID);
+                command.Parameters.AddWithValue("@custName", customerToBeSaved.CustName);
+                command.Parameters.AddWithValue("@AddressID", addressID);
+
+                string query2 =
+                    "INSERT INTO address (addressId, address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdateBy) " +
+                    "VALUES (@AddressID, @Address1, @address2, @cityID, @postalCode, @phone, NOW(), 'SystemAdd', 'SystemAdd');";
+
+                MySqlCommand command2 = new MySqlCommand(query2, conn);
+                command2.Parameters.AddWithValue("@AddressID", addressID);
+                command2.Parameters.AddWithValue("@Address1", customerToBeSaved.CustAddress1);
+                command2.Parameters.AddWithValue("@address2", customerToBeSaved.CustAddress2);
+                command2.Parameters.AddWithValue("@cityID", cityID);
+                command2.Parameters.AddWithValue("@postalCode", customerToBeSaved.CustPostalCode);
+                command2.Parameters.AddWithValue("@phone", customerToBeSaved.CustPhone);
+
+                string query3 =
+                    "INSERT INTO city (cityId, city, countryId, createDate, createdBy, lastUpdateBy) " +
+                    "VALUES (@cityId, @city, @countyId, Now(), 'SystemAdd', 'SystemAdd');";
+
+                MySqlCommand command3 = new MySqlCommand(query3, conn);
+                command3.Parameters.AddWithValue("@cityId", cityID);
+                command3.Parameters.AddWithValue("@city", customerToBeSaved.CustCity);
+                command3.Parameters.AddWithValue("@countyId", countryID);
+
+                string query4 =
+                    "INSERT INTO country (countryId, country, createDate, createdBy, lastUpdateBy) " +
+                    "VALUES (@countyId, @country, Now(), 'SystemAdd', 'SystemAdd');";
+
+                MySqlCommand command4 = new MySqlCommand(query4, conn);
+                command4.Parameters.AddWithValue("@countyId", countryID);
+                command4.Parameters.AddWithValue("@country", customerToBeSaved.CustCountry);
+
+                command4.ExecuteNonQuery();
+                command3.ExecuteNonQuery();
+                command2.ExecuteNonQuery();
+                command.ExecuteNonQuery();
             }
             catch
             {
