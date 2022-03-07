@@ -72,33 +72,129 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
             AppointmentCustomerPickList.DataSource = data.GetCustomerIdList();
             AppointmentUserIDPickList.DataSource = data.GetUserIdList();
+
+            
+        }
+
+        private static bool aptHasConflict(DateTime startTime, DateTime endTime)
+        {
+            Appointment_DataProcedures AptData = new Appointment_DataProcedures();
+
+            bool hasConlict = false; 
+
+            foreach (DataRow Apt in AptData.CreateAppointmentTable().Rows)
+            {
+                if (startTime < Convert.ToDateTime(Apt["End Time"]) && endTime > Convert.ToDateTime(Apt["Start Time"]))
+                {
+                    hasConlict = true;
+                    return hasConlict;
+                }
+            }
+            return hasConlict;
+        }
+
+        private static bool aptIsOutsideBusinessHours (DateTime startTime, DateTime endTime)
+        {
+            Appointment_DataProcedures AptData = new Appointment_DataProcedures();
+
+            startTime = startTime.ToLocalTime();
+            endTime = endTime.ToLocalTime();
+
+            DateTime businessStart = DateTime.Today.AddHours(8); // 8am
+            DateTime businessEnd = DateTime.Today.AddHours(17); // 5pm
+
+            if (startTime.TimeOfDay > businessStart.TimeOfDay && startTime.TimeOfDay < businessEnd.TimeOfDay &&
+                endTime.TimeOfDay > businessStart.TimeOfDay && endTime.TimeOfDay < businessEnd.TimeOfDay)
+            {
+                return false;
+            }
+            return true;
         }
 
         private void AppointmentSaveBtn_Click(object sender, EventArgs e)
         {
+            bool allFieldshaveText = true;
+
             Appointment_DataProcedures data = new Appointment_DataProcedures();
 
-            Appointment appointmentToSave = new Appointment(
-                Convert.ToInt32(AppointmentIdText.Text),
-                AppointmentTitleText.Text,
-                Convert.ToInt32(AppointmentUserIDPickList.SelectedItem),
-                Convert.ToInt32(AppointmentCustomerPickList.SelectedItem), // This isn't working
-                //AppointmentCustomerPickList.Text,
-                AppointmentTypeText.Text,
-                AppointmentStartDateTimePicker.Value,
-                AppointmentEndDateTimePicker.Value);
+            DateTime startTime = AppointmentStartDateTimePicker.Value.ToUniversalTime();
+            DateTime endTime = AppointmentEndDateTimePicker.Value.ToUniversalTime();
 
-            if (newAppointment == true)
+            Appointment appointmentToSave = new Appointment(
+                        Convert.ToInt32(AppointmentIdText.Text),
+                        AppointmentTitleText.Text,
+                        Convert.ToInt32(AppointmentUserIDPickList.SelectedItem),
+                        Convert.ToInt32(AppointmentCustomerPickList.SelectedItem),
+                        AppointmentTypeText.Text,
+                        startTime,
+                        endTime);
+
+            if (string.IsNullOrEmpty(AppointmentTitleText.Text))
             {
-                data.SaveNewAppointment(appointmentToSave);
+                allFieldshaveText = false;
+                AppointmentTitleText.BackColor = Color.Salmon;
             }
-            else
+            if (string.IsNullOrEmpty(AppointmentTypeText.Text))
             {
-                data.SaveUpdatedAppointment(appointmentToSave);
+                allFieldshaveText = false;
+                AppointmentTypeText.BackColor = Color.Salmon;
             }
-            Close();
+
+            if (allFieldshaveText == true)
+            {
+                try
+                {
+                    if(aptHasConflict(startTime, endTime))
+                    {
+                        throw new appointmentException();
+                    }
+                    else
+                    {
+                        try
+                        {
+                            if (aptIsOutsideBusinessHours(startTime, endTime))
+                                {
+                                throw new appointmentException();
+                                }
+                            else
+                            {
+                                if (newAppointment == true)
+                                {
+                                    data.SaveNewAppointment(appointmentToSave);
+                                }
+                                else
+                                {
+                                    data.SaveUpdatedAppointment(appointmentToSave);
+                                }
+                                Close();
+                            }
+                        }
+                        catch (appointmentException ex) { ex.businessHours(); }
+                        {
+
+                        }
+                    }
+                }
+                catch (appointmentException ex) { ex.appOverlap(); }
+                {
+
+                }
+            }
         }
 
+        class appointmentException : ApplicationException
+        {
+            public void businessHours()
+            {
+                MessageBox.Show("Appointments must be within normal business hours. (8am - 5pm)");
+            }
+
+            public void appOverlap()
+            {
+                MessageBox.Show("Your appointment conflicts with an already present appointment");
+            }
+        }
+    
         private void AppointmentCancelBtn_Click(object sender, EventArgs e)
         {
             this.Close();

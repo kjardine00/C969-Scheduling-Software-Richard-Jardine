@@ -13,6 +13,8 @@ namespace C969_Scheduling_Software___Richard_Jardine
 {
     public partial class LoginForm : Form
     {
+        string errorMsg = "";
+
         public LoginForm()
         {
             InitializeComponent();
@@ -47,6 +49,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             PasswordLabel.Text = "Password";
             LoginBtn.Text = "Login";
             CloseBtn.Text = "Close";
+            errorMsg = "Incorrect username or password";
         }
 
         private void displayDutch()
@@ -57,6 +60,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             PasswordLabel.Text = "Wachtwoord";
             LoginBtn.Text = "Log in";
             CloseBtn.Text = "Afmeleden";
+            errorMsg = "Onjuiste gebruikersnaam of wachtwoord";
         }
 
         private void LoginBtn_Click(object sender, EventArgs e)
@@ -71,7 +75,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             }
             else
             {
-                MessageBox.Show("Incorrect username or password");
+                MessageBox.Show(errorMsg);
             }
         }
 

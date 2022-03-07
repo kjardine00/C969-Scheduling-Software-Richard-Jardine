@@ -161,6 +161,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // AllAppointmentsRadio
             // 
             this.AllAppointmentsRadio.AutoSize = true;
+            this.AllAppointmentsRadio.Checked = true;
             this.AllAppointmentsRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.AllAppointmentsRadio.Location = new System.Drawing.Point(13, 353);
             this.AllAppointmentsRadio.Name = "AllAppointmentsRadio";
@@ -208,12 +209,11 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // 
             this.ByMonthRadio.AutoSize = true;
             this.ByMonthRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.ByMonthRadio.Location = new System.Drawing.Point(249, 353);
+            this.ByMonthRadio.Location = new System.Drawing.Point(285, 354);
             this.ByMonthRadio.Name = "ByMonthRadio";
-            this.ByMonthRadio.Size = new System.Drawing.Size(96, 21);
+            this.ByMonthRadio.Size = new System.Drawing.Size(132, 21);
             this.ByMonthRadio.TabIndex = 2;
-            this.ByMonthRadio.TabStop = true;
-            this.ByMonthRadio.Text = "This Month";
+            this.ByMonthRadio.Text = "Upcoming Month";
             this.ByMonthRadio.UseVisualStyleBackColor = true;
             this.ByMonthRadio.CheckedChanged += new System.EventHandler(this.ByMonthRadio_CheckedChanged);
             // 
@@ -223,10 +223,9 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.ByWeekRadio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.ByWeekRadio.Location = new System.Drawing.Point(150, 354);
             this.ByWeekRadio.Name = "ByWeekRadio";
-            this.ByWeekRadio.Size = new System.Drawing.Size(93, 21);
+            this.ByWeekRadio.Size = new System.Drawing.Size(129, 21);
             this.ByWeekRadio.TabIndex = 1;
-            this.ByWeekRadio.TabStop = true;
-            this.ByWeekRadio.Text = "This Week";
+            this.ByWeekRadio.Text = "Upcoming Week";
             this.ByWeekRadio.UseVisualStyleBackColor = true;
             this.ByWeekRadio.CheckedChanged += new System.EventHandler(this.ByWeekRadio_CheckedChanged);
             // 

@@ -73,6 +73,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.PasswordTextBox.Name = "PasswordTextBox";
             this.PasswordTextBox.Size = new System.Drawing.Size(162, 23);
             this.PasswordTextBox.TabIndex = 3;
+            this.PasswordTextBox.UseSystemPasswordChar = true;
             // 
             // PasswordLabel
             // 

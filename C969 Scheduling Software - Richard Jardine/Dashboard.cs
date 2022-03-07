@@ -12,37 +12,35 @@ namespace C969_Scheduling_Software___Richard_Jardine
 {
     public partial class Dashboard : Form
     {
-        private BindingSource CustomerDashboard = new BindingSource();
-        //private BindingSource AppointmentDashboard = new BindingSource(); //These all do nothing need to figure out datetime filtering
-        private BindingSource ReportsDashboard = new BindingSource();
-
         private DataTable AppointmentDashboard = new DataTable();
+        private DataTable CustomerDashboard = new DataTable();
 
         public Dashboard()
         {
             InitializeComponent();
-            MainScreen_Load();
+            CustomerDashboard_Load();
+            AppointmentDashboard_Load();
         }
 
-        private void MainScreen_Load()
+        private void CustomerDashboard_Load()
         {
             Customer_DataProcedures customerData = new Customer_DataProcedures();
-            CustomerDGV.DataSource = customerData.CreateCustomerTable();
+            CustomerDashboard = customerData.CreateCustomerTable();
+            CustomerDGV.DataSource = CustomerDashboard;
+        }
 
+        private void AppointmentDashboard_Load()
+        {
             Appointment_DataProcedures appointmentData = new Appointment_DataProcedures();
             AppointmentDashboard = appointmentData.CreateAppointmentTable();
             AppointmentDGV.DataSource = AppointmentDashboard;
-
-            AllAppointmentsRadio.Checked = true;
-            ByWeekRadio.Checked = false;
-            ByMonthRadio.Checked = false;
         }
 
         private void AddNewCustBtn_Click(object sender, EventArgs e)
         {
             Admin_DataProcedures data = new Admin_DataProcedures();
             new CustomerForm(true, data.CreateNewID("customer")).ShowDialog();
-            MainScreen_Load();
+            CustomerDashboard_Load();
         }
 
         private void UpdateCustBtn_Click(object sender, EventArgs e)
@@ -57,7 +55,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
                 new CustomerForm(false, selectedCustIDint).ShowDialog();
 
-                MainScreen_Load();
+                CustomerDashboard_Load();
             }
             else
             {
@@ -84,7 +82,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
                 {
                     // do nothing
                 }
-                MainScreen_Load();
+                CustomerDashboard_Load();
             }
             else
             {
@@ -97,7 +95,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
         {
             Admin_DataProcedures data = new Admin_DataProcedures();
             new AppointmentForm(true, data.CreateNewID("appointment")).ShowDialog();
-            MainScreen_Load();
+            AppointmentDashboard_Load();
         }
 
         private void UpdateAppointmentBtn_Click(object sender, EventArgs e)
@@ -114,6 +112,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             {
                 MessageBox.Show("Please select a Appointment you would like to Update.");
             }
+            AppointmentDashboard_Load();
         }
 
         private void DeleteAppointmentBtn_Click(object sender, EventArgs e)
@@ -135,7 +134,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
                 {
                     // do nothing
                 }
-                MainScreen_Load();
+                AppointmentDashboard_Load();
             }
             else
             {
@@ -145,33 +144,31 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
         private void AllAppointmentsRadio_CheckedChanged(object sender, EventArgs e)
         {
-            MainScreen_Load();
+            AppointmentDashboard_Load();
         }
 
         private void ByWeekRadio_CheckedChanged(object sender, EventArgs e)
         {
             Appointment_DataProcedures appointmentData = new Appointment_DataProcedures();
 
-            string weekStart = DateTime.Today.AddDays(-1 * (int)DateTime.Today.DayOfWeek).ToString();
-            string weekEnd = DateTime.Today.AddDays((int)DateTime.Today.DayOfWeek).ToString();
+            DateTime weekStart = DateTime.Now;
+            DateTime weekEnd = DateTime.Now.AddDays(7);
 
-
-
-            AppointmentDashboard = appointmentData.CreateAppointmentTable().Select().Where(
-                p => (Convert.ToDateTime(p["Start Time"]) >= Convert.ToDateTime(weekStart)) 
-                && (Convert.ToDateTime(p["Start Time"]) <= Convert.ToDateTime(weekEnd))).CopyToDataTable();
+            AppointmentDashboard = appointmentData.GetAppointmentsByDateRange(weekStart, weekEnd);
 
             AppointmentDGV.DataSource = AppointmentDashboard;
         }
 
         private void ByMonthRadio_CheckedChanged(object sender, EventArgs e)
         {
-            string monthStart = DateTime.Today.AddDays(-Convert.ToDouble(DateTime.Now.Day - 1)).ToString();
-            string monthEnd = DateTime.Today.AddDays(-Convert.ToDouble(DateTime.Now.Day - 1)).AddMonths(1).AddDays(-1).ToString();
+            Appointment_DataProcedures appointmentData = new Appointment_DataProcedures();
 
-            //AppointmentDashboard.Filter = "Start Time >= #" + monthStart + "# and End Time <= #" + monthEnd + "#";
-            //AppointmentDGV.Refresh();
-            //This doesn't work
+            DateTime monthStart = DateTime.Now;
+            DateTime monthEnd = DateTime.Now.AddMonths(1);
+
+            AppointmentDashboard = appointmentData.GetAppointmentsByDateRange(monthStart, monthEnd);
+
+            AppointmentDGV.DataSource = AppointmentDashboard;
         }
 
         private void GenerateReportBtn_Click(object sender, EventArgs e)

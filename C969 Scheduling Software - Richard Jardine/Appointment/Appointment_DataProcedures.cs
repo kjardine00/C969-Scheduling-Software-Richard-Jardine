@@ -54,6 +54,15 @@ namespace C969_Scheduling_Software___Richard_Jardine
                             reader["end"]);
                     }
                 }
+
+                foreach (DataRow row in appointmentDashboard.Rows)
+                {
+                    DateTime utcStart = Convert.ToDateTime(row["Start Time"]);
+                    DateTime utcEnd = Convert.ToDateTime(row["End Time"]);
+                    row["Start Time"] = TimeZone.CurrentTimeZone.ToLocalTime(utcStart);
+                    row["End Time"] = TimeZone.CurrentTimeZone.ToLocalTime(utcEnd);
+                }
+
             }
             catch (Exception ex)
             {
@@ -296,6 +305,84 @@ namespace C969_Scheduling_Software___Richard_Jardine
             {
                 conn.Close();
             }
+        }
+
+        public static string DateFormatToString(DateTime date)
+        {
+            string DateToString = date.ToString("yyyy-MM-dd HH:mm:ss");
+
+            return DateToString;
+        }
+
+        public DataTable GetAppointmentsByDateRange(DateTime startDate, DateTime endDate)
+        {
+            DataTable appointmentsByWeek = new DataTable();
+
+            MySqlConnection conn = new MySqlConnection(connectionString);
+
+            if (!appointmentsByWeek.Columns.Contains("AptID")) { appointmentsByWeek.Columns.Add("AptID", typeof(int)); }
+            if (!appointmentsByWeek.Columns.Contains("Title")) { appointmentsByWeek.Columns.Add("Title", typeof(string)); }
+            if (!appointmentsByWeek.Columns.Contains("User ID")) { appointmentsByWeek.Columns.Add("User ID", typeof(string)); }
+            if (!appointmentsByWeek.Columns.Contains("Customer")) { appointmentsByWeek.Columns.Add("Customer", typeof(string)); }
+            if (!appointmentsByWeek.Columns.Contains("Type")) { appointmentsByWeek.Columns.Add("Type", typeof(string)); }
+            if (!appointmentsByWeek.Columns.Contains("Start Time")) { appointmentsByWeek.Columns.Add("Start Time", typeof(DateTime)); }
+            if (!appointmentsByWeek.Columns.Contains("End Time")) { appointmentsByWeek.Columns.Add("End Time", typeof(DateTime)); }
+
+            try
+            {
+                conn.Open();
+
+                string query = 
+                    "SELECT appointment.appointmentId, " +
+                    "appointment.title, " +
+                    "appointment.userId, " +
+                    "customer.customerName, " +
+                    "appointment.type, " +
+                    "appointment.start, " +
+                    "appointment.end " +
+                    "FROM appointment " +
+                    "INNER JOIN customer ON customer.customerId = appointment.customerId " +
+                    "WHERE appointment.start >= @weekStart " +
+                    "AND appointment.end <= @weekEnd " +
+                    "ORDER BY start;";
+
+                MySqlCommand command = new MySqlCommand(query, conn);
+                command.Parameters.AddWithValue("@weekStart", DateFormatToString(startDate));
+                command.Parameters.AddWithValue("@weekEnd", DateFormatToString(endDate));
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        appointmentsByWeek.Rows.Add(
+                            reader["appointmentId"],
+                            reader["title"],
+                            reader["userId"],
+                            reader["customerName"],
+                            reader["type"],
+                            reader["start"],
+                            reader["end"]);
+                    }
+                }
+
+                foreach (DataRow row in appointmentsByWeek.Rows)
+                {
+                    DateTime utcStart = Convert.ToDateTime(row["Start Time"]);
+                    DateTime utcEnd = Convert.ToDateTime(row["End Time"]);
+                    row["Start Time"] = TimeZone.CurrentTimeZone.ToLocalTime(utcStart);
+                    row["End Time"] = TimeZone.CurrentTimeZone.ToLocalTime(utcEnd);
+                }
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return appointmentsByWeek;
         }
     }
 }

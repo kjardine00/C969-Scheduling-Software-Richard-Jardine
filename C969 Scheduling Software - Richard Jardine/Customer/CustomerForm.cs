@@ -48,6 +48,46 @@ namespace C969_Scheduling_Software___Richard_Jardine
         {
             Customer_DataProcedures data = new Customer_DataProcedures();
 
+            bool allFieldshaveText = true;
+
+            if (string.IsNullOrEmpty(CustIDText.Text))
+            {
+                allFieldshaveText = false;
+                CustIDText.BackColor = Color.Salmon;
+            }
+            if (string.IsNullOrEmpty(CustNameText.Text))
+            {
+                allFieldshaveText = false;
+                CustNameText.BackColor = Color.Salmon;
+            }
+            if (string.IsNullOrEmpty(CustAddress1Text.Text))
+            {
+                allFieldshaveText = false;
+                CustAddress1Text.BackColor = Color.Salmon;
+            }
+            if (string.IsNullOrEmpty(CustCityText.Text))
+            {
+                allFieldshaveText = false;
+                CustCityText.BackColor = Color.Salmon;
+            }
+            if (string.IsNullOrEmpty(CustCountryText.Text))
+            {
+                allFieldshaveText = false;
+                CustCountryText.BackColor = Color.Salmon;
+            }
+            if (string.IsNullOrEmpty(CustPostalCodeText.Text))
+            {
+                allFieldshaveText = false;
+                CustPostalCodeText.BackColor = Color.Salmon;
+            }
+            if (string.IsNullOrEmpty(CustPhoneText.Text))
+            {
+                allFieldshaveText = false;
+                CustPhoneText.BackColor = Color.Salmon;
+            }
+
+            if ( allFieldshaveText == true)
+            {
             Customer customerToBeSaved = new Customer(
                 Convert.ToInt32(CustIDText.Text), 
                 CustNameText.Text, 
@@ -68,6 +108,11 @@ namespace C969_Scheduling_Software___Richard_Jardine
                 data.SaveUpdatedCustomer(customerToBeSaved);
             }
             Close();
+            }
+            else
+            {
+                MessageBox.Show("Please fill in all required fields.");
+            }
         }
 
         private void CustCancelBtn_Click(object sender, EventArgs e)
