@@ -13,8 +13,10 @@ namespace C969_Scheduling_Software___Richard_Jardine
     public partial class Dashboard : Form
     {
         private BindingSource CustomerDashboard = new BindingSource();
-        private BindingSource AppointmentDashboard = new BindingSource(); //These all do nothing need to figure out datetime filtering
+        //private BindingSource AppointmentDashboard = new BindingSource(); //These all do nothing need to figure out datetime filtering
         private BindingSource ReportsDashboard = new BindingSource();
+
+        private DataTable AppointmentDashboard = new DataTable();
 
         public Dashboard()
         {
@@ -28,7 +30,8 @@ namespace C969_Scheduling_Software___Richard_Jardine
             CustomerDGV.DataSource = customerData.CreateCustomerTable();
 
             Appointment_DataProcedures appointmentData = new Appointment_DataProcedures();
-            AppointmentDGV.DataSource = appointmentData.CreateAppointmentTable();
+            AppointmentDashboard = appointmentData.CreateAppointmentTable();
+            AppointmentDGV.DataSource = AppointmentDashboard;
 
             AllAppointmentsRadio.Checked = true;
             ByWeekRadio.Checked = false;
@@ -92,9 +95,9 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
         private void AddNewAppointmentBtn_Click(object sender, EventArgs e)
         {
-            //Appointment_DataProcedures data = new Appointment_DataProcedures();
-            //new AppointmentForm(true, data.CreateNewID("appointment")).ShowDialog();
-            //MainScreen_Load();
+            Admin_DataProcedures data = new Admin_DataProcedures();
+            new AppointmentForm(true, data.CreateNewID("appointment")).ShowDialog();
+            MainScreen_Load();
         }
 
         private void UpdateAppointmentBtn_Click(object sender, EventArgs e)
@@ -103,9 +106,9 @@ namespace C969_Scheduling_Software___Richard_Jardine
             {
                 string selectedAptID = AppointmentDGV.SelectedRows[0].Cells[0].Value.ToString();
 
-                int selectedCustIDint = Convert.ToInt32(selectedAptID);
+                int selectedAptIDint = Convert.ToInt32(selectedAptID);
 
-                new AppointmentForm(false, selectedCustIDint).ShowDialog();
+                new AppointmentForm(false, selectedAptIDint).ShowDialog();
             }
             else
             {
@@ -132,6 +135,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
                 {
                     // do nothing
                 }
+                MainScreen_Load();
             }
             else
             {
@@ -141,16 +145,23 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
         private void AllAppointmentsRadio_CheckedChanged(object sender, EventArgs e)
         {
-            AppointmentDashboard.Filter = null;
+            MainScreen_Load();
         }
 
         private void ByWeekRadio_CheckedChanged(object sender, EventArgs e)
         {
+            Appointment_DataProcedures appointmentData = new Appointment_DataProcedures();
+
             string weekStart = DateTime.Today.AddDays(-1 * (int)DateTime.Today.DayOfWeek).ToString();
             string weekEnd = DateTime.Today.AddDays((int)DateTime.Today.DayOfWeek).ToString();
 
-            AppointmentDashboard.Filter = "Date >= #" + weekStart + "# and Date <= #" + weekEnd + "#";
-            //This doesn't work
+
+
+            AppointmentDashboard = appointmentData.CreateAppointmentTable().Select().Where(
+                p => (Convert.ToDateTime(p["Start Time"]) >= Convert.ToDateTime(weekStart)) 
+                && (Convert.ToDateTime(p["Start Time"]) <= Convert.ToDateTime(weekEnd))).CopyToDataTable();
+
+            AppointmentDGV.DataSource = AppointmentDashboard;
         }
 
         private void ByMonthRadio_CheckedChanged(object sender, EventArgs e)
@@ -158,8 +169,8 @@ namespace C969_Scheduling_Software___Richard_Jardine
             string monthStart = DateTime.Today.AddDays(-Convert.ToDouble(DateTime.Now.Day - 1)).ToString();
             string monthEnd = DateTime.Today.AddDays(-Convert.ToDouble(DateTime.Now.Day - 1)).AddMonths(1).AddDays(-1).ToString();
 
-            AppointmentDashboard.Filter = "Start Time >= #" + monthStart + "# and End Time <= #" + monthEnd + "#";
-            AppointmentDGV.Refresh();
+            //AppointmentDashboard.Filter = "Start Time >= #" + monthStart + "# and End Time <= #" + monthEnd + "#";
+            //AppointmentDGV.Refresh();
             //This doesn't work
         }
 

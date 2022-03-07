@@ -308,6 +308,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             // 
             // ReportsDGV
             // 
+            this.ReportsDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.ReportsDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ReportsDGV.Dock = System.Windows.Forms.DockStyle.Top;
             this.ReportsDGV.Location = new System.Drawing.Point(3, 3);
@@ -315,6 +316,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             this.ReportsDGV.Name = "ReportsDGV";
             this.ReportsDGV.ReadOnly = true;
             this.ReportsDGV.RowHeadersVisible = false;
+            this.ReportsDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ReportsDGV.Size = new System.Drawing.Size(860, 344);
             this.ReportsDGV.TabIndex = 0;
             // 

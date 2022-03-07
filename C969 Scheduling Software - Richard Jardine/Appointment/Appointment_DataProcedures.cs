@@ -2,17 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace C969_Scheduling_Software___Richard_Jardine
 {
     public class Appointment_DataProcedures
     {
         private string connectionString = "Host=localhost; Port=3306; Database=client_schedule; Username=sqlUser; Password=Passw0rd!";
-        MySqlDataAdapter dataAdapter = new MySqlDataAdapter();
-        DataTable appointmentDashboard = new DataTable();
 
         public DataTable CreateAppointmentTable()
         {
@@ -72,20 +67,21 @@ namespace C969_Scheduling_Software___Richard_Jardine
             return appointmentDashboard;
         }
 
-        public Appointments UpdatedAptList(int selectedID)
+        public Appointment GetSelectedApt(int selectedID)
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
 
-            Appointments selectedApt = null;
+            Appointment selectedApt = null;
 
             try
             {
                 conn.Open();
 
-                string query = "SELECT appointment.appointmentId, " +
+                string query = 
+                    "SELECT appointment.appointmentId, " +
                     "appointment.title, " +
                     "appointment.userId, " +
-                    "customer.customerName, " +
+                    "appointment.customerId, " +
                     "appointment.type, " +
                     "appointment.start, " +
                     "appointment.end " +
@@ -101,11 +97,11 @@ namespace C969_Scheduling_Software___Richard_Jardine
                 {
                     while (reader.Read())
                     {
-                        selectedApt = new Appointments(
+                        selectedApt = new Appointment(
                             Convert.ToInt32(reader["appointmentId"]),
                             reader["title"].ToString(),
                             Convert.ToInt32(reader["userId"]),
-                            reader["customerName"].ToString(),
+                            Convert.ToInt32(reader["customerId"]),
                             reader["type"].ToString(),
                             Convert.ToDateTime(reader["start"]),
                             Convert.ToDateTime(reader["end"]));
@@ -124,17 +120,17 @@ namespace C969_Scheduling_Software___Richard_Jardine
             return selectedApt;
         }
 
-        public List<string> GetCustomerNameList()
+        public List<int> GetCustomerIdList()
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
 
-            List<string> CustomerList = new List<string>();
-
+            List<int> CustomerIdList = new List<int>();
+            
             try
             {
                 conn.Open();
 
-                string query = "SELECT customerName FROM customer";
+                string query = "SELECT customerId FROM customer";
 
                 MySqlCommand command = new MySqlCommand(query, conn);
 
@@ -142,7 +138,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
                 {
                     while (reader.Read())
                     {
-                        CustomerList.Add(reader["customerName"].ToString());
+                        CustomerIdList.Add(Convert.ToInt32(reader["customerId"]));
                     }
                     reader.Close();
                 }
@@ -155,12 +151,151 @@ namespace C969_Scheduling_Software___Richard_Jardine
             {
                 conn.Close();
             }
-            return CustomerList;
+            return CustomerIdList;
+        }
+
+        public List<int> GetUserIdList()
+        {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+
+            List<int> UserIdList = new List<int>();
+
+            try
+            {
+                conn.Open();
+
+                string query = "SELECT userId FROM user";
+
+                MySqlCommand command = new MySqlCommand(query, conn);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        UserIdList.Add(Convert.ToInt32(reader["userId"]));
+                    }
+                    reader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return UserIdList;
         }
 
         public void DeleteAppointment(int appointmentId)
         {
+            MySqlConnection conn = new MySqlConnection(connectionString);
 
+            try
+            {
+                conn.Open();
+
+                string query = "DELETE FROM appointment WHERE appointmentId = @appointmentId;";
+
+                MySqlCommand command = new MySqlCommand(query, conn);
+                command.Parameters.AddWithValue("@appointmentId", appointmentId);
+
+                command.ExecuteNonQuery();
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public void SaveNewAppointment(Appointment appointmentToBeSaved)
+        {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+
+            Admin_DataProcedures data = new Admin_DataProcedures();
+            int aptID = data.CreateNewID("appointment");
+
+            try
+            {
+                conn.Open();
+
+                string query =
+                    "INSERT INTO appointment " +
+                    "(appointmentId, title, userId, customerId, type, start, end, " +
+                    "description, location, url, contact, createDate, createdBy, lastUpdate, lastUpdateBy) " +
+                    "VALUES " +
+                    "(@appointmentId, @appointmenttitle, @userId, @customerId, @type, @start, @end, " +
+                    "'not needed', 'not needed', 'not needed', 'not needed', NOW(), 'System', NOW(), 'System');";
+
+                string format = "yyyy-MM-dd HH:mm:ss";
+
+                MySqlCommand command = new MySqlCommand(query, conn);
+                command.Parameters.AddWithValue("@appointmentId", appointmentToBeSaved.AptID);
+                command.Parameters.AddWithValue("@appointmenttitle", appointmentToBeSaved.AptTitle);
+                command.Parameters.AddWithValue("@userId", appointmentToBeSaved.AptUserID);
+                command.Parameters.AddWithValue("@customerId", appointmentToBeSaved.AptCustID);
+                command.Parameters.AddWithValue("@type", appointmentToBeSaved.AptType);
+                command.Parameters.AddWithValue("@start", appointmentToBeSaved.AptStart.ToUniversalTime().ToString(format));
+                command.Parameters.AddWithValue("@end", appointmentToBeSaved.AptEnd.ToUniversalTime().ToString(format));
+
+                command.ExecuteNonQuery();
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public void SaveUpdatedAppointment(Appointment appointmentToBeSaved)
+        {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+
+            Admin_DataProcedures data = new Admin_DataProcedures();
+
+            try
+            {
+                conn.Open();
+
+                string query =
+                    "UPDATE appointment " +
+                    "SET appointmentId = @appointmentId, " +
+                    "title = @title, " +
+                    "userId = @userId, " +
+                    "customerId = @customerId, " +
+                    "type = @type, " +
+                    "start = @start, " +
+                    "end = @end)";
+
+                string format = "yyyy-MM-dd HH:mm:ss";
+
+                MySqlCommand command = new MySqlCommand(query, conn);
+                command.Parameters.AddWithValue("@appointmentId", appointmentToBeSaved.AptID);
+                command.Parameters.AddWithValue("@title", appointmentToBeSaved.AptTitle);
+                command.Parameters.AddWithValue("@userId", appointmentToBeSaved.AptUserID);
+                command.Parameters.AddWithValue("@customerId", appointmentToBeSaved.AptCustID);
+                command.Parameters.AddWithValue("@type", appointmentToBeSaved.AptType);
+                command.Parameters.AddWithValue("@start", appointmentToBeSaved.AptStart.ToUniversalTime().ToString(format));
+                command.Parameters.AddWithValue("@end", appointmentToBeSaved.AptEnd.ToUniversalTime().ToString(format));
+
+                command.ExecuteNonQuery();
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }

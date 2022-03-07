@@ -32,7 +32,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
                 string dbPassword = checkPassword.ExecuteScalar().ToString();
                 return true;
             }
-            catch (Exception)
+            catch (System.Exception)
             {
 
             }

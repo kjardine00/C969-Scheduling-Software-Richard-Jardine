@@ -31,7 +31,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             {
                 CustomerTitle.Text = "Update Customer";
 
-                Customer selectedCustomer = Cdata.UpdatedCustList(CustID);
+                Customer selectedCustomer = Cdata.GetSelectedCustomer(CustID);
 
                 CustIDText.Text = selectedCustomer.CustID.ToString();
                 CustNameText.Text = selectedCustomer.CustName;
@@ -47,8 +47,6 @@ namespace C969_Scheduling_Software___Richard_Jardine
         private void CustSaveBtn_Click(object sender, EventArgs e)
         {
             Customer_DataProcedures data = new Customer_DataProcedures();
-
-            
 
             Customer customerToBeSaved = new Customer(
                 Convert.ToInt32(CustIDText.Text), 

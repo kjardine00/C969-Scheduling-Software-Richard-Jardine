@@ -86,7 +86,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>client_scheduleDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Appointment\Appointments.cs" />
+    <Compile Include="Appointment\Appointment.cs" />
     <Compile Include="Customer\Customer.cs" />
     <Compile Include="Customer\CustomerForm.cs">
       <SubType>Form</SubType>

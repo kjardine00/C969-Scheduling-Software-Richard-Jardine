@@ -70,7 +70,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             return customerDashboard;
         }
 
-        public Customer UpdatedCustList(int SelectedID)
+        public Customer GetSelectedCustomer(int SelectedID)
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
 
@@ -228,19 +228,19 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
                 string query3 =
                     "INSERT INTO city (cityId, city, countryId, createDate, createdBy, lastUpdateBy) " +
-                    "VALUES (@cityId, @city, @countyId, Now(), 'SystemAdd', 'SystemAdd');";
+                    "VALUES (@cityId, @city, @countryId, Now(), 'SystemAdd', 'SystemAdd');";
 
                 MySqlCommand command3 = new MySqlCommand(query3, conn);
                 command3.Parameters.AddWithValue("@cityId", cityID);
                 command3.Parameters.AddWithValue("@city", customerToBeSaved.CustCity);
-                command3.Parameters.AddWithValue("@countyId", countryID);
+                command3.Parameters.AddWithValue("@countryId", countryID);
 
                 string query4 =
                     "INSERT INTO country (countryId, country, createDate, createdBy, lastUpdateBy) " +
-                    "VALUES (@countyId, @country, Now(), 'SystemAdd', 'SystemAdd');";
+                    "VALUES (@countryId, @country, Now(), 'SystemAdd', 'SystemAdd');";
 
                 MySqlCommand command4 = new MySqlCommand(query4, conn);
-                command4.Parameters.AddWithValue("@countyId", countryID);
+                command4.Parameters.AddWithValue("@countryId", countryID);
                 command4.Parameters.AddWithValue("@country", customerToBeSaved.CustCountry);
 
                 command4.ExecuteNonQuery();
@@ -300,7 +300,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
                 command3.Parameters.AddWithValue("@custID", customerToBeSaved.CustID);
 
                 string query4 =
-                    "INSERT INTO country " +
+                    "UPDATE country " +
                     "SET country = @country " +
                     "WHERE countryId = " +
                     "(SELECT countryId FROM city WHERE cityId = " +
