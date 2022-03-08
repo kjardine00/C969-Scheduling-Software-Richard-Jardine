@@ -66,6 +66,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
         private void LoginBtn_Click(object sender, EventArgs e)
         {
             Admin_DataProcedures data = new Admin_DataProcedures();
+
             User currentUser = new User(UsernameTextBox.Text, PasswordTextBox.Text);
 
             int currentUserID = data.GetCurrentUserID(currentUser);
@@ -74,7 +75,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             {
                 this.Hide();
                 new Dashboard(currentUserID).ShowDialog();
-
+                LoginLog.TrackUserLogins(currentUserID);
             }
             else
             {

@@ -17,6 +17,8 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
             Admin_DataProcedures AdminData = new Admin_DataProcedures();
 
+            
+
             if (UserID != 0)
             {
                 int AptIdReminder = AdminData.CheckForAptReminder(UserID);
