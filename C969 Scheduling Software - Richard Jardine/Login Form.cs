@@ -18,30 +18,30 @@ namespace C969_Scheduling_Software___Richard_Jardine
         public LoginForm()
         {
             InitializeComponent();
-            Show_correct_lang();
+            Show_Correct_Lang();
         }
 
-        private void Show_correct_lang()
+        private void Show_Correct_Lang()
         {
             CultureInfo currentCulture = CultureInfo.CurrentCulture;
 
             switch (currentCulture.TwoLetterISOLanguageName)
             {
                 case "en":
-                    displayEng();
+                    DisplayEng();
                     break;
 
                 case "nl":
-                    displayDutch();
+                    DisplayDutch();
                     break;
 
                 default:
-                    displayEng();
+                    DisplayEng();
                     break;
             }
         }
 
-        private void displayEng()
+        private void DisplayEng()
         {
             this.Text = "Login";
             TitleLabel.Text = "Scheduler Assistant";
@@ -52,7 +52,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             errorMsg = "Incorrect username or password";
         }
 
-        private void displayDutch()
+        private void DisplayDutch()
         {
             this.Text = "Log In";
             TitleLabel.Text = "Planner Assistent";
@@ -68,10 +68,13 @@ namespace C969_Scheduling_Software___Richard_Jardine
             Admin_DataProcedures data = new Admin_DataProcedures();
             User currentUser = new User(UsernameTextBox.Text, PasswordTextBox.Text);
 
+            int currentUserID = data.GetCurrentUserID(currentUser);
+
             if (data.VerifyUser(currentUser) == true)
             {
                 this.Hide();
-                new Dashboard().ShowDialog();
+                new Dashboard(currentUserID).ShowDialog();
+
             }
             else
             {

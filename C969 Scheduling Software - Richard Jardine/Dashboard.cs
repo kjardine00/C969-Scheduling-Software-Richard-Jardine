@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace C969_Scheduling_Software___Richard_Jardine
@@ -15,11 +9,25 @@ namespace C969_Scheduling_Software___Richard_Jardine
         private DataTable AppointmentDashboard = new DataTable();
         private DataTable CustomerDashboard = new DataTable();
 
-        public Dashboard()
+        public Dashboard(int UserID)
         {
             InitializeComponent();
             CustomerDashboard_Load();
             AppointmentDashboard_Load();
+
+            Admin_DataProcedures AdminData = new Admin_DataProcedures();
+
+            if (UserID != 0)
+            {
+                int AptIdReminder = AdminData.CheckForAptReminder(UserID);
+
+                if(AptIdReminder != 0)
+                {
+                    string AptIdTitle = AdminData.GetAptTitle(AptIdReminder);
+
+                    MessageBox.Show("You have the Appointment '" + AptIdReminder.ToString() + ": " + AptIdTitle + "' in the next 15 minutes.", "Reminder");
+                }
+            }
         }
 
         private void CustomerDashboard_Load()

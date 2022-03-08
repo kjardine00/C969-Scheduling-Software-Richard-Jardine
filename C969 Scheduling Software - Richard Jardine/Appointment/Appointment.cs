@@ -15,18 +15,16 @@ namespace C969_Scheduling_Software___Richard_Jardine
         public string AptTitle { get; set; }
         public int AptUserID { get; set; }
         public int AptCustID { get; set; }
-        //public string AptCustomer { get; set; }
         public string AptType { get; set; }
         public DateTime AptStart { get; set; }
         public DateTime AptEnd { get; set; }
 
-        public Appointment(int AppointmentID, string AppointmentTitle, int AppointmentUserID, int AppointmentCustID, /*string AppointmentCustomer,*/ string AppointmentType, DateTime AppointmentStart, DateTime AppointmentEnd)
+        public Appointment(int AppointmentID, string AppointmentTitle, int AppointmentUserID, int AppointmentCustID, string AppointmentType, DateTime AppointmentStart, DateTime AppointmentEnd)
         {
             AptID = AppointmentID;
             AptTitle = AppointmentTitle;
             AptUserID = AppointmentUserID;
             AptCustID = AppointmentCustID;
-            //AptCustomer = AppointmentCustomer;
             AptType = AppointmentType;
             AptStart = AppointmentStart;
             AptEnd = AppointmentEnd;
