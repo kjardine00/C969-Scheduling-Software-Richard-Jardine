@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
+using System.Linq;
+using System.Text;
 
 namespace C969_Scheduling_Software___Richard_Jardine
 {
@@ -8,6 +12,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
     {
         private DataTable AppointmentDashboard = new DataTable();
         private DataTable CustomerDashboard = new DataTable();
+        private BindingSource ReportsDashboard = new BindingSource();
 
         public Dashboard(int UserID)
         {
@@ -184,11 +189,28 @@ namespace C969_Scheduling_Software___Richard_Jardine
         private void GenerateReportBtn_Click(object sender, EventArgs e)
         {
             Reports_DataProcedures reportsData = new Reports_DataProcedures();
-            
 
             if (AppointmentsByTypeRadio.Checked == true)
             {
-                ReportsDGV.DataSource = reportsData.GetAppointmentsByType();
+                ReportsDashboard.Clear();
+                
+                List<Appointment> AppointmentList = reportsData.GetAppointmentsList();
+                List<AppointmentByType> AptByType = new List<AppointmentByType>();
+                List<AppointmentByType> report = new List<AppointmentByType>();
+
+                foreach (Appointment apt in AppointmentList)
+                {
+                    int month = apt.AptStart.Month;
+                    int year = apt.AptStart.Year;
+                    int count = 0;
+
+                    AppointmentByType reportItem = new AppointmentByType("Month: " + month.ToString() + " Year: " + year.ToString(), apt.AptType, count);
+                    report.Add(reportItem);
+                }
+
+                ReportsDashboard.DataSource = report.GroupBy(x => new { x.Month, x.Type }).Select(g => new { g.Key , Count = g.Count()});
+
+                ReportsDGV.DataSource = ReportsDashboard;
             }
             if (ConsultantSchedulesRadio.Checked == true)
             {
@@ -197,6 +219,20 @@ namespace C969_Scheduling_Software___Richard_Jardine
             if (CustomerCountRadio.Checked == true)
             {
                 ReportsDGV.DataSource = reportsData.GetCustomerCount();
+            }
+        }
+
+        private class AppointmentByType
+        {
+            public string Month { get; set; }
+            public string Type { get; set; }
+            public int Count { get; set; }
+
+            public AppointmentByType (string month, string type, int count1)
+            {
+                Month = month;
+                Type = type;
+                Count = count1;
             }
         }
 

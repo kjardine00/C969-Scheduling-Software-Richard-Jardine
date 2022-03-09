@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -14,34 +15,44 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
         public DataTable reportsDashboard = new DataTable();
 
-        public DataTable GetAppointmentsByType()
+        public List<Appointment> GetAppointmentsList()
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
 
-            reportsDashboard.Clear();
+            string query =
+                "SELECT appointmentId, " +
+                    "title, " +
+                   "userId, " +
+                    "customerId, " +
+                    "type, " +
+                    "start, " +
+                    "end " +
+                    "FROM appointment;";
+
+            List<Appointment> appointments = new List<Appointment>();
 
             try
             {
                 conn.Open();
-
-                string query =
-                    "SELECT " +
-                    "appointment.type, " +
-                    "appointment.appointmentId, " +
-                    "appointment.title, " +
-                    "customer.customerName, " +
-                    "appointment.userId, " +
-                    "appointment.start, " +
-                    "appointment.end " +
-                    "FROM appointment " +
-                    "INNER JOIN customer ON customer.customerId = appointment.customerId " +
-                    "ORDER BY appointment.type;";
-
                 MySqlCommand command = new MySqlCommand(query, conn);
 
-                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Appointment newAppointment = new Appointment(
+                            Convert.ToInt32(reader["appointmentId"]),
+                            reader["title"].ToString(),
+                            Convert.ToInt32(reader["userId"]),
+                            Convert.ToInt32(reader["customerId"]),
+                            reader["type"].ToString(),
+                            Convert.ToDateTime(reader["start"]).ToLocalTime(),
+                            Convert.ToDateTime(reader["end"]).ToLocalTime());
 
-                adapter.Fill(reportsDashboard);
+                        appointments.Add(newAppointment);
+                    }
+                    reader.Close();
+                }
             }
             catch
             {
@@ -51,7 +62,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             {
                 conn.Close();
             }
-            return reportsDashboard;
+            return appointments;
         }
 
         public DataTable GetConsultantSchedulesRadio()
