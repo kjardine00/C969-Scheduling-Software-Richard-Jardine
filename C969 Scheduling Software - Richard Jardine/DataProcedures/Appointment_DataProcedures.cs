@@ -7,7 +7,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
 {
     public class Appointment_DataProcedures
     {
-        private string connectionString = "Host=localhost; Port=3306; Database=client_schedule; Username=sqlUser; Password=Passw0rd!";
+        private readonly string connectionString = "Server=127.0.0.1; Port=3306; Database=client_schedule; Username=sqlUser; Password=Passw0rd!";
 
         public DataTable CreateAppointmentTable()
         {
