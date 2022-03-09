@@ -13,6 +13,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
         private DataTable AppointmentDashboard = new DataTable();
         private DataTable CustomerDashboard = new DataTable();
         private BindingSource ReportsDashboard = new BindingSource();
+        private DataTable ReportsDashboardDataTable = new DataTable();
 
         public Dashboard(int UserID)
         {
@@ -42,6 +43,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             Customer_DataProcedures customerData = new Customer_DataProcedures();
             CustomerDashboard = customerData.CreateCustomerTable();
             CustomerDGV.DataSource = CustomerDashboard;
+            CustomerDGV.Sort(CustomerDGV.Columns[0], System.ComponentModel.ListSortDirection.Ascending);
         }
 
         private void AppointmentDashboard_Load()
@@ -49,6 +51,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             Appointment_DataProcedures appointmentData = new Appointment_DataProcedures();
             AppointmentDashboard = appointmentData.CreateAppointmentTable();
             AppointmentDGV.DataSource = AppointmentDashboard;
+            AppointmentDGV.Sort(AppointmentDGV.Columns[0], System.ComponentModel.ListSortDirection.Ascending);
         }
 
         private void AddNewCustBtn_Click(object sender, EventArgs e)
@@ -208,17 +211,25 @@ namespace C969_Scheduling_Software___Richard_Jardine
                     report.Add(reportItem);
                 }
 
-                ReportsDashboard.DataSource = report.GroupBy(x => new { x.Month, x.Type }).Select(g => new { g.Key , Count = g.Count()});
+                ReportsDashboard.DataSource = report.GroupBy(x => new { x.Month, x.Type }).Select(g => new { g.Key.Month, g.Key.Type, Count = g.Count()}); //Here we use the Lambda Function to more efficiently match month and type of appointment and count the pairs. 
 
                 ReportsDGV.DataSource = ReportsDashboard;
             }
             if (ConsultantSchedulesRadio.Checked == true)
             {
-                ReportsDGV.DataSource = reportsData.GetConsultantSchedulesRadio();
+                ReportsDashboard.Clear();
+
+                List<Appointment> AppointmentList = reportsData.GetAppointmentsList();
+
+                ReportsDashboard.DataSource = AppointmentList.Select(x => new { x.AptUserID, x.AptID, x.AptTitle, x.AptStart }).OrderBy(x => x.AptUserID); //Here we use the Lambda Function to more efficiently filter out useful information for user schedules.
             }
             if (CustomerCountRadio.Checked == true)
             {
-                ReportsDGV.DataSource = reportsData.GetCustomerCount();
+                List<Customer> CustomerList = reportsData.GetCustomerList();
+
+                int CustomerCount = CustomerList.Count;
+
+                MessageBox.Show("The current customer count is " + CustomerCount.ToString() + ".", "Customer Count");
             }
         }
 

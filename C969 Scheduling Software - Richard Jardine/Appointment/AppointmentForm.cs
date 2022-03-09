@@ -34,8 +34,8 @@ namespace C969_Scheduling_Software___Richard_Jardine
                 AppointmentIdText.Text = selectedAppointment.AptID.ToString();
                 AppointmentTitleText.Text = selectedAppointment.AptTitle;
                 AppointmentTypeText.Text = selectedAppointment.AptType;
-                AppointmentStartDateTimePicker.Value = selectedAppointment.AptStart;
-                AppointmentEndDateTimePicker.Value = selectedAppointment.AptEnd;
+                AppointmentStartDateTimePicker.Value = selectedAppointment.AptStart.ToLocalTime();
+                AppointmentEndDateTimePicker.Value = selectedAppointment.AptEnd.ToLocalTime();
 
                 custID = selectedAppointment.AptCustID;
 

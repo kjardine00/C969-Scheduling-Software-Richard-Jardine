@@ -13,8 +13,6 @@ namespace C969_Scheduling_Software___Richard_Jardine
     {
         private readonly string connectionString = "Host=localhost; Port=3306; Database=client_schedule; Username=sqlUser; Password=Passw0rd!";
 
-        public DataTable reportsDashboard = new DataTable();
-
         public List<Appointment> GetAppointmentsList()
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
@@ -65,34 +63,48 @@ namespace C969_Scheduling_Software___Richard_Jardine
             return appointments;
         }
 
-        public DataTable GetConsultantSchedulesRadio()
+        public List<Customer> GetCustomerList()
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
 
-            reportsDashboard.Clear();
+            string query = "SELECT customer.customerId, " +
+                "customer.customerName, " +
+                "address.address, " +
+                "address.address2, " +
+                "city.city, " +
+                "country.country, " +
+                "address.postalCode, " +
+                "address.phone " +
+                "FROM(((customer INNER JOIN address ON customer.addressId = address.addressId) " +
+                "INNER JOIN city ON address.cityId = city.cityId ) " +
+                "INNER JOIN country ON city.countryId = country.countryId );";
+
+            List<Customer> CustomerList = new List<Customer>();
 
             try
             {
                 conn.Open();
 
-                string query = 
-                    "SELECT user.userId, " +
-                    "user.userName, " +
-                    "appointment.appointmentId, " +
-                    "appointment.title, " +
-                    "appointment.customerId, " +
-                    "appointment.type, " +
-                    "appointment.start, " +
-                    "appointment.end " +
-                    "FROM appointment " +
-                    "INNER JOIN user ON appointment.userId = user.userId " +
-                    "ORDER BY user.userId; ";
-
                 MySqlCommand command = new MySqlCommand(query, conn);
 
-                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Customer newCustomer = new Customer(
+                        Convert.ToInt32(reader["customerId"]),
+                        reader["customerName"].ToString(),
+                        reader["address"].ToString(),
+                        reader["address2"].ToString(),
+                        reader["city"].ToString(),
+                        reader["country"].ToString(),
+                        reader["postalCode"].ToString(),
+                        reader["phone"].ToString());
 
-                adapter.Fill(reportsDashboard);
+                        CustomerList.Add(newCustomer);
+                    }
+                    reader.Close();
+                }
             }
             catch
             {
@@ -102,36 +114,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             {
                 conn.Close();
             }
-            return reportsDashboard;
-        }
-
-        public DataTable GetCustomerCount()
-        {
-            MySqlConnection conn = new MySqlConnection(connectionString);
-
-            reportsDashboard.Clear();
-
-            try
-            {
-                conn.Open();
-
-                string query = "SELECT COUNT(customerId) FROM customer; ";
-
-                MySqlCommand command = new MySqlCommand(query, conn);
-
-                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
-
-                adapter.Fill(reportsDashboard);
-            }
-            catch
-            {
-
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return reportsDashboard;
+            return CustomerList;
         }
     }
 }
