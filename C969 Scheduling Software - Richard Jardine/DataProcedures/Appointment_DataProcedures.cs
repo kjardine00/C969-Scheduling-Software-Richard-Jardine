@@ -62,17 +62,15 @@ namespace C969_Scheduling_Software___Richard_Jardine
                     row["Start Time"] = TimeZone.CurrentTimeZone.ToLocalTime(utcStart);
                     row["End Time"] = TimeZone.CurrentTimeZone.ToLocalTime(utcEnd);
                 }
-
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine("Exception thrown when creating appointments datatable: " + ex);
             }
             finally
             {
                 conn.Close();
             }
-
             return appointmentDashboard;
         }
 
@@ -120,7 +118,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine("Exception thrown when getting selected appointment: " + ex);
             }
             finally
             {
@@ -154,7 +152,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine("Exception thrown when getting customer id list: " + ex);
             }
             finally 
             {
@@ -188,7 +186,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine("Exception thrown when getting a list of User Id's: " + ex);
             }
             finally
             {
@@ -212,9 +210,9 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
                 command.ExecuteNonQuery();
             }
-            catch
+            catch (Exception ex)
             {
-
+                Console.WriteLine("Exception thrown when deleting selected appointment: " + ex);
             }
             finally
             {
@@ -254,9 +252,9 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
                 command.ExecuteNonQuery();
             }
-            catch
+            catch (Exception ex)
             {
-
+                Console.WriteLine("Exception thrown when saving new appointment: " + ex);
             }
             finally
             {
@@ -297,9 +295,9 @@ namespace C969_Scheduling_Software___Richard_Jardine
 
                 command.ExecuteNonQuery();
             }
-            catch
+            catch (Exception ex)
             {
-
+                Console.WriteLine("Exception thrown when updating selected appointment: " + ex);
             }
             finally
             {
@@ -373,9 +371,9 @@ namespace C969_Scheduling_Software___Richard_Jardine
                     row["End Time"] = TimeZone.CurrentTimeZone.ToLocalTime(utcEnd);
                 }
             }
-            catch
+            catch (Exception ex)
             {
-
+                Console.WriteLine("Exception thrown when getting appointments by date range: " + ex);
             }
             finally
             {

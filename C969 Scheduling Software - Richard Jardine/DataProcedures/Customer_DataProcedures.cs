@@ -60,7 +60,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine("Exception thrown when creating customer datatable: " + ex);
             }
             finally
             {
@@ -117,7 +117,7 @@ namespace C969_Scheduling_Software___Richard_Jardine
             }
             catch (Exception ex)
             {
-                return null;
+                Console.WriteLine("Exception thrown when getting selected customer: " + ex);
             }
             finally
             {
@@ -175,9 +175,9 @@ namespace C969_Scheduling_Software___Richard_Jardine
                 command3.ExecuteNonQuery();
                 command4.ExecuteNonQuery();
             }
-            catch
+            catch (Exception ex)
             {
-
+                Console.WriteLine("Exception thrown when deleteing selected customer: " + ex);
             }
             finally
             {
@@ -248,9 +248,9 @@ namespace C969_Scheduling_Software___Richard_Jardine
                 command2.ExecuteNonQuery();
                 command.ExecuteNonQuery();
             }
-            catch
+            catch (Exception ex)
             {
-
+                Console.WriteLine("Exception thrown when saving customer: " + ex);
             }
             finally
             {
@@ -316,9 +316,9 @@ namespace C969_Scheduling_Software___Richard_Jardine
                 command3.ExecuteNonQuery();
                 command4.ExecuteNonQuery();
             }
-            catch
+            catch (Exception ex)
             {
-
+                Console.WriteLine("Exception thrown when updating selected customer: " + ex);
             }
             finally
             {

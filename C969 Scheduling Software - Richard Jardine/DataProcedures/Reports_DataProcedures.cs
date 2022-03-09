@@ -52,9 +52,9 @@ namespace C969_Scheduling_Software___Richard_Jardine
                     reader.Close();
                 }
             }
-            catch
+            catch (Exception ex)
             {
-
+                Console.WriteLine("Exception thrown when getting appointment list: " + ex);
             }
             finally
             {
@@ -106,9 +106,9 @@ namespace C969_Scheduling_Software___Richard_Jardine
                     reader.Close();
                 }
             }
-            catch
+            catch (Exception ex)
             {
-
+                Console.WriteLine("Exception thrown when getting customer list: " + ex);
             }
             finally
             {
